@@ -1,0 +1,154 @@
+﻿@model KnowledgeBox.Models.Item
+
+@{
+  ViewBag.Title = "Admin";
+}
+
+<link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
+<link href="~/Content/jquery.fileupload-ui.css" rel="stylesheet" />
+<style>
+  a:hover {
+    text-decoration: none;
+    background: transparent;
+  }
+</style>
+
+<script src="~/Scripts/bootstrap-multiselect.js"></script>
+<script src="~/Scripts/jquery.ui.widget.js"></script>
+<script src="~/Scripts/jquery.iframe-transport.js"></script>
+<script src="~/Scripts/jquery.fileupload.js"></script>
+
+<div class="container" style="height: 712px; width: 1200px; padding-right: 0px; padding-left: 0px; margin-right: auto; margin-left: auto">
+  <div class="navbar navbar-inverse" role="navigation" style="border-radius:0px; margin-bottom:0px;background:#b3bd4d;border:none; border-top-left-radius: 3px;border-top-right-radius: 3px;">
+    @Html.Partial("_AdminMenu")
+  </div>
+  <div class="row" style="margin: 0; background: #FFF; padding: 20px">
+    <div class="col-md-12" style="">
+      @using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+      {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+          @Html.LabelFor(m => m.Item_Name, new { @class = "col-sm-2 control-label", @for = "name" })
+          <div class="col-sm-6">
+            @Html.TextBoxFor(m => m.Item_Name, new { @class = "form-control", id = "name", placeholder = "Enter name" })
+          </div>
+        </div>
+        
+        <div class="form-group">
+          @Html.LabelFor(m => m.Item_Description, new { @class = "col-sm-2 control-label", @for = "description" })
+          <div class="col-sm-6">
+            @Html.TextBoxFor(m => m.Item_Description, new { @class = "form-control", id = "description", placeholder = "Enter Description" })
+          </div>
+        </div>
+        
+        <div class="form-group">
+          @Html.LabelFor(m => m.Item_TagWords, new { @class = "col-sm-2 control-label", @for = "tags" })
+          <div class="col-sm-6">
+            @Html.TextBoxFor(m => m.Item_TagWords, new { @class = "form-control", id = "tags", placeholder = "Enter tags" })
+          </div>
+        </div>
+                
+        <div class="form-group">
+          @Html.LabelFor(m => m.ContentType, new { @class = "col-sm-2 control-label", @for = "content" })
+          <div class="col-sm-6">
+            @Html.DropDownListFor(m => m.ContentType_Id, ViewBag.ContentType as SelectList, new { @class = "form-control" })
+          </div>
+        </div>
+        
+        <div class="form-group">
+          @Html.LabelFor(m => m.Phase, new { @class = "col-sm-2 control-label", @for = "phase" })
+          <div class="col-sm-6">
+            @Html.DropDownListFor(m => m.Phase_Id, ViewBag.Phase as SelectList, new { @class = "form-control" })
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="name">Subject</label>
+          <div class="col-sm-6">
+            @Html.DropDownList("Subject", ViewBag.Subject as SelectList, new { @class = "form-control multiselect", multiple = "multiple", name = "subject[]" })
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="name">Target</label>
+          <div class="col-sm-6">
+            @Html.DropDownList("Target", ViewBag.Target as SelectList, new { @class = "form-control multiselect", multiple = "multiple", name = "target[]" })
+          </div>
+        </div>
+        @*                        
+        <div class="form-group">
+          @Html.LabelFor(m => m.Item_FilePath, new { @class = "col-sm-2 control-label", @for = "file" })
+          <div class="col-sm-4">
+            @Html.TextBoxFor(m => m.Item_FilePath, new { @class = "form-control", id = "tags", placeholder = "Upload File" })
+          </div>
+          <div class="col-sm-1">
+            <div class="fileinput fileinput-new" data-provides="fileinput">              
+              <span class="btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span>
+                @Html.TextBoxFor(m => m.Item_FilePath, new { id = "file", type = "file" })
+              <span class="fileinput-filename"></span>
+              <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <button type="button" class="btn btn-default" id="uploadFile">Upload</button>
+          </div>
+        </div>*@
+
+        <div class="form-group">
+          @Html.LabelFor(m => m.Item_FilePath, new { @class = "col-sm-2 control-label", @for = "file" })           
+            <div class="col-sm-5">
+              @Html.TextBoxFor(m => m.Item_FilePath, new { @class = "form-control", id = "Item_FilePath", placeholder = "Upload File" })
+            </div>
+          <div class="col-sm-1">
+              <span class="btn btn-success fileinput-button">
+                <i class="icon-plus icon-white"></i>
+                <span>Add file</span>
+                <input id="fileupload" class="btn btn-default" type="file" name="file" data-url="/Upload/UploadHandler.ashx")" multiple>            
+              </span>
+            </div>
+        </div>              
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Save</button>            
+              <a href="@Url.Action("Index")">
+                <button type="button" class="btn btn-default">Cancel</button>
+              </a>            
+          </div>
+        </div>                 
+      }
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function () {
+
+    $('.multiselect').multiselect({
+      numberDisplayed: 4
+    });
+    var fileName = $('#file').val();
+    $('.fileinput-filename').text(fileName);
+
+
+    @foreach (var subject in ViewBag.SubjectSelected as Array)
+    {
+      <text>
+    $('#Subject').multiselect('select', '@subject');
+    </text>
+    }
+
+    @foreach (var target in ViewBag.TargetSelected as Array)
+    {
+      <text>
+    $('#Target').multiselect('select', '@target');
+    </text>
+    }
+
+    $('#fileupload').fileupload({
+      dataType: 'json',
+      done: function (e, data) {        
+        $('#Item_FilePath').val(data.result[0].name);
+      }
+    });
+  });
+</script>

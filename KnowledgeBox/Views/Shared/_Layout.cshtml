@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        <link href="~/Content/bootstrap.css" rel="stylesheet" />
+        @Scripts.Render("~/bundles/modernizr")
+      <link href="~/Content/knowledgeBox.css" rel="stylesheet" />
+
+      <script src="~/Scripts/jquery-1.9.0.js"></script>
+      <script src="~/Scripts/bootstrap.js"></script>
+    </head>
+    <body>
+        <header style="width:1200px;margin:0 auto">
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p class="site-title">Bright Media Logo</p>
+                </div>
+                <div class="float-right">
+                    <p class="site-title">KnowledgeBox Logo</p>
+                </div>
+            </div>
+            <br /><br /><br />            
+        </header>
+        <div id="body">
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
+        <footer>
+            <div class="">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                </div>
+            </div>
+        </footer>
+        
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

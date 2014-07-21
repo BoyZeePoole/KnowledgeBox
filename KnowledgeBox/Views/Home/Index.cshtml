@@ -1,0 +1,81 @@
+﻿@{
+  ViewBag.Title = "Home Page";
+}
+<style>
+
+
+.nav li a {
+color: white;text-decoration: none;font-size: 38px;text-shadow: 0px 1px 2px #555;
+}
+
+</style>
+<div class="container" style="height: 712px; width: 1200px;padding-right: 0px;padding-left: 0px;margin-right: auto;margin-left: auto">
+  <div class="navbar navbar-inverse" role="navigation" style="border-radius:0px; margin-bottom:0px;background:#b3bd4d;border:none; border-top-left-radius: 3px;border-top-right-radius: 3px;">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div id="menu">
+        <ul class="menu" style="font-family: 'League Gothic Regular',Arial,sans-serif;">
+          <li class=""><a href="#">Home</a></li>
+          <li><a href="#knowledge">Knowledge Box</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+        <form class="navbar-form navbar-right" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+          <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+        </form>
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+  </div>
+  <div class="row" style="margin:0">
+    <div class="col-md-3" style="height: 650px;z-index:120; padding-left:0;background: #FFF">
+      @Html.Partial("_MenuPartial");
+    </div>
+    <div class="col-md-9" style="height: 650px; background: #FFF; padding: 12px;z-index:100">
+      <div style="font-size: 46px; text-align: center" class="coolheading">
+        Welcome to the knowledge Box
+      </div>
+      <br />
+      <br />
+      <br />
+      <div style="width: 60%; margin: 0 auto; padding: 5px;font-size: 34px; list-style:none;font-family: 'League Gothic Regular',Arial,sans-serif;text-align:center;line-height:34px"  class="coolheading">
+        <!--<ul style="font-size: 34px; list-style:none;font-family: 'League Gothic Regular',Arial,sans-serif;text-align:center;"  class="coolheading">-->
+          Great resource for teachers, learners and parents
+            <span style="font-size:24px">(worksheets, apps, slideshows, animations and more...)</span><br />
+          All for free
+          Send us your great teaching resources today.<br>        
+      </div>
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <div class="row">
+        <div class="col-xs-8 col-sm-6" style="text-align:center">
+          <div class="tile css3-shadow" style="margin:0 auto;width:90%;padding:10px;height:200px;">
+            <h4 class="green" style="height:180px">Our Kiosk Knowledge Box content goes here...</h4>
+          </div>
+        </div>
+        <div class="col-xs-4 col-sm-6">
+          <div class="tile css3-shadow" style="margin: 0 auto; text-align: center;width:90%;padding:10px;height:200px;">
+            <h4 class="green" style="height:180px">Bright Media making a difference...</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+

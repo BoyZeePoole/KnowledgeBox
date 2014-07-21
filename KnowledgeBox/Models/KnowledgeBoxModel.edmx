@@ -1,0 +1,467 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="KnowledgeBoxModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="KnowledgeBoxModelStoreContainer">
+          <EntitySet Name="ContentType" EntityType="KnowledgeBoxModel.Store.ContentType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Item" EntityType="KnowledgeBoxModel.Store.Item" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ItemSubject" EntityType="KnowledgeBoxModel.Store.ItemSubject" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ItemTarget" EntityType="KnowledgeBoxModel.Store.ItemTarget" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Phase" EntityType="KnowledgeBoxModel.Store.Phase" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Subject" EntityType="KnowledgeBoxModel.Store.Subject" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Target" EntityType="KnowledgeBoxModel.Store.Target" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Item_ContentType" Association="KnowledgeBoxModel.Store.FK_Item_ContentType">
+            <End Role="ContentType" EntitySet="ContentType" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Phase" Association="KnowledgeBoxModel.Store.FK_Item_Phase">
+            <End Role="Phase" EntitySet="Phase" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemSubject_Item" Association="KnowledgeBoxModel.Store.FK_ItemSubject_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="ItemSubject" EntitySet="ItemSubject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemSubject_Subject" Association="KnowledgeBoxModel.Store.FK_ItemSubject_Subject">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="ItemSubject" EntitySet="ItemSubject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemTarget_Item" Association="KnowledgeBoxModel.Store.FK_ItemTarget_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="ItemTarget" EntitySet="ItemTarget" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemTarget_Target" Association="KnowledgeBoxModel.Store.FK_ItemTarget_Target">
+            <End Role="Target" EntitySet="Target" />
+            <End Role="ItemTarget" EntitySet="ItemTarget" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ContentType">
+          <Key>
+            <PropertyRef Name="ContentType_Id" />
+          </Key>
+          <Property Name="ContentType_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ContentType_Date" Type="datetime" Nullable="false" />
+          <Property Name="ContentType_Description" Type="varchar" Nullable="false" MaxLength="150" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Item_Id" />
+          </Key>
+          <Property Name="Item_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Item_Date" Type="datetime" Nullable="false" />
+          <Property Name="Item_Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Item_Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="Item_TagWords" Type="varchar" MaxLength="300" />
+          <Property Name="Item_FilePath" Type="varchar" Nullable="false" MaxLength="150" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ContentType_Id" Type="int" Nullable="false" />
+          <Property Name="Phase_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItemSubject">
+          <Key>
+            <PropertyRef Name="ItemSubject_Id" />
+          </Key>
+          <Property Name="ItemSubject_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Item_Id" Type="int" Nullable="false" />
+          <Property Name="Subject_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItemTarget">
+          <Key>
+            <PropertyRef Name="ItemTarget_Id" />
+          </Key>
+          <Property Name="ItemTarget_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Item_Id" Type="int" Nullable="false" />
+          <Property Name="Target_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Phase">
+          <Key>
+            <PropertyRef Name="Phase_Id" />
+          </Key>
+          <Property Name="Phase_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Phase_Description" Type="varchar" Nullable="false" MaxLength="150" />
+          <Property Name="Phase_Date" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="Subject_Id" />
+          </Key>
+          <Property Name="Subject_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Subject_Description" Type="varchar" Nullable="false" MaxLength="150" />
+          <Property Name="Subject_Date" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Target">
+          <Key>
+            <PropertyRef Name="Target_Id" />
+          </Key>
+          <Property Name="Target_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Target_Description" Type="varchar" Nullable="false" MaxLength="150" />
+          <Property Name="Target_Date" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Item_ContentType">
+          <End Role="ContentType" Type="KnowledgeBoxModel.Store.ContentType" Multiplicity="1" />
+          <End Role="Item" Type="KnowledgeBoxModel.Store.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContentType">
+              <PropertyRef Name="ContentType_Id" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="ContentType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Phase">
+          <End Role="Phase" Type="KnowledgeBoxModel.Store.Phase" Multiplicity="1" />
+          <End Role="Item" Type="KnowledgeBoxModel.Store.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phase">
+              <PropertyRef Name="Phase_Id" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="Phase_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemSubject_Item">
+          <End Role="Item" Type="KnowledgeBoxModel.Store.Item" Multiplicity="1" />
+          <End Role="ItemSubject" Type="KnowledgeBoxModel.Store.ItemSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Item_Id" />
+            </Principal>
+            <Dependent Role="ItemSubject">
+              <PropertyRef Name="Item_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemSubject_Subject">
+          <End Role="Subject" Type="KnowledgeBoxModel.Store.Subject" Multiplicity="1" />
+          <End Role="ItemSubject" Type="KnowledgeBoxModel.Store.ItemSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Subject_Id" />
+            </Principal>
+            <Dependent Role="ItemSubject">
+              <PropertyRef Name="Subject_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemTarget_Item">
+          <End Role="Item" Type="KnowledgeBoxModel.Store.Item" Multiplicity="1" />
+          <End Role="ItemTarget" Type="KnowledgeBoxModel.Store.ItemTarget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Item_Id" />
+            </Principal>
+            <Dependent Role="ItemTarget">
+              <PropertyRef Name="Item_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemTarget_Target">
+          <End Role="Target" Type="KnowledgeBoxModel.Store.Target" Multiplicity="1" />
+          <End Role="ItemTarget" Type="KnowledgeBoxModel.Store.ItemTarget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Target">
+              <PropertyRef Name="Target_Id" />
+            </Principal>
+            <Dependent Role="ItemTarget">
+              <PropertyRef Name="Target_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KnowledgeBoxModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="KnowledgeBoxEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="ContentTypes" EntityType="KnowledgeBoxModel.ContentType" />
+          <EntitySet Name="Items" EntityType="KnowledgeBoxModel.Item" />
+          <EntitySet Name="ItemSubjects" EntityType="KnowledgeBoxModel.ItemSubject" />
+          <EntitySet Name="ItemTargets" EntityType="KnowledgeBoxModel.ItemTarget" />
+          <EntitySet Name="Phases" EntityType="KnowledgeBoxModel.Phase" />
+          <EntitySet Name="Subjects" EntityType="KnowledgeBoxModel.Subject" />
+          <EntitySet Name="Targets" EntityType="KnowledgeBoxModel.Target" />
+          <AssociationSet Name="FK_Item_ContentType" Association="KnowledgeBoxModel.FK_Item_ContentType">
+            <End Role="ContentType" EntitySet="ContentTypes" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Phase" Association="KnowledgeBoxModel.FK_Item_Phase">
+            <End Role="Phase" EntitySet="Phases" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemSubject_Item" Association="KnowledgeBoxModel.FK_ItemSubject_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="ItemSubject" EntitySet="ItemSubjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemTarget_Item" Association="KnowledgeBoxModel.FK_ItemTarget_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="ItemTarget" EntitySet="ItemTargets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemSubject_Subject" Association="KnowledgeBoxModel.FK_ItemSubject_Subject">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="ItemSubject" EntitySet="ItemSubjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemTarget_Target" Association="KnowledgeBoxModel.FK_ItemTarget_Target">
+            <End Role="Target" EntitySet="Targets" />
+            <End Role="ItemTarget" EntitySet="ItemTargets" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ContentType">
+          <Key>
+            <PropertyRef Name="ContentType_Id" />
+          </Key>
+          <Property Name="ContentType_Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ContentType_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ContentType_Description" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Items" Relationship="KnowledgeBoxModel.FK_Item_ContentType" FromRole="ContentType" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Item_Id" />
+          </Key>
+          <Property Name="Item_Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Item_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Item_Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Item_Description" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Item_TagWords" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="Item_FilePath" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ContentType_Id" Type="Int32" Nullable="false" />
+          <Property Name="Phase_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ContentType" Relationship="KnowledgeBoxModel.FK_Item_ContentType" FromRole="Item" ToRole="ContentType" />
+          <NavigationProperty Name="Phase" Relationship="KnowledgeBoxModel.FK_Item_Phase" FromRole="Item" ToRole="Phase" />
+          <NavigationProperty Name="ItemSubjects" Relationship="KnowledgeBoxModel.FK_ItemSubject_Item" FromRole="Item" ToRole="ItemSubject" />
+          <NavigationProperty Name="ItemTargets" Relationship="KnowledgeBoxModel.FK_ItemTarget_Item" FromRole="Item" ToRole="ItemTarget" />
+        </EntityType>
+        <EntityType Name="ItemSubject">
+          <Key>
+            <PropertyRef Name="ItemSubject_Id" />
+          </Key>
+          <Property Name="ItemSubject_Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Item_Id" Type="Int32" Nullable="false" />
+          <Property Name="Subject_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="KnowledgeBoxModel.FK_ItemSubject_Item" FromRole="ItemSubject" ToRole="Item" />
+          <NavigationProperty Name="Subject" Relationship="KnowledgeBoxModel.FK_ItemSubject_Subject" FromRole="ItemSubject" ToRole="Subject" />
+        </EntityType>
+        <EntityType Name="ItemTarget">
+          <Key>
+            <PropertyRef Name="ItemTarget_Id" />
+          </Key>
+          <Property Name="ItemTarget_Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Item_Id" Type="Int32" Nullable="false" />
+          <Property Name="Target_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="KnowledgeBoxModel.FK_ItemTarget_Item" FromRole="ItemTarget" ToRole="Item" />
+          <NavigationProperty Name="Target" Relationship="KnowledgeBoxModel.FK_ItemTarget_Target" FromRole="ItemTarget" ToRole="Target" />
+        </EntityType>
+        <EntityType Name="Phase">
+          <Key>
+            <PropertyRef Name="Phase_Id" />
+          </Key>
+          <Property Name="Phase_Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Phase_Description" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="Phase_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Items" Relationship="KnowledgeBoxModel.FK_Item_Phase" FromRole="Phase" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="Subject_Id" />
+          </Key>
+          <Property Name="Subject_Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject_Description" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="Subject_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ItemSubjects" Relationship="KnowledgeBoxModel.FK_ItemSubject_Subject" FromRole="Subject" ToRole="ItemSubject" />
+        </EntityType>
+        <EntityType Name="Target">
+          <Key>
+            <PropertyRef Name="Target_Id" />
+          </Key>
+          <Property Name="Target_Id" Type="Int32" Nullable="false" />
+          <Property Name="Target_Description" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="Target_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ItemTargets" Relationship="KnowledgeBoxModel.FK_ItemTarget_Target" FromRole="Target" ToRole="ItemTarget" />
+        </EntityType>
+        <Association Name="FK_Item_ContentType">
+          <End Role="ContentType" Type="KnowledgeBoxModel.ContentType" Multiplicity="1" />
+          <End Role="Item" Type="KnowledgeBoxModel.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContentType">
+              <PropertyRef Name="ContentType_Id" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="ContentType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Phase">
+          <End Role="Phase" Type="KnowledgeBoxModel.Phase" Multiplicity="1" />
+          <End Role="Item" Type="KnowledgeBoxModel.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phase">
+              <PropertyRef Name="Phase_Id" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="Phase_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemSubject_Item">
+          <End Role="Item" Type="KnowledgeBoxModel.Item" Multiplicity="1" />
+          <End Role="ItemSubject" Type="KnowledgeBoxModel.ItemSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Item_Id" />
+            </Principal>
+            <Dependent Role="ItemSubject">
+              <PropertyRef Name="Item_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemTarget_Item">
+          <End Role="Item" Type="KnowledgeBoxModel.Item" Multiplicity="1" />
+          <End Role="ItemTarget" Type="KnowledgeBoxModel.ItemTarget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Item_Id" />
+            </Principal>
+            <Dependent Role="ItemTarget">
+              <PropertyRef Name="Item_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemSubject_Subject">
+          <End Role="Subject" Type="KnowledgeBoxModel.Subject" Multiplicity="1" />
+          <End Role="ItemSubject" Type="KnowledgeBoxModel.ItemSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Subject_Id" />
+            </Principal>
+            <Dependent Role="ItemSubject">
+              <PropertyRef Name="Subject_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemTarget_Target">
+          <End Role="Target" Type="KnowledgeBoxModel.Target" Multiplicity="1" />
+          <End Role="ItemTarget" Type="KnowledgeBoxModel.ItemTarget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Target">
+              <PropertyRef Name="Target_Id" />
+            </Principal>
+            <Dependent Role="ItemTarget">
+              <PropertyRef Name="Target_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KnowledgeBoxModelStoreContainer" CdmEntityContainer="KnowledgeBoxEntities">
+          <EntitySetMapping Name="ContentTypes">
+            <EntityTypeMapping TypeName="KnowledgeBoxModel.ContentType">
+              <MappingFragment StoreEntitySet="ContentType">
+                <ScalarProperty Name="ContentType_Id" ColumnName="ContentType_Id" />
+                <ScalarProperty Name="ContentType_Date" ColumnName="ContentType_Date" />
+                <ScalarProperty Name="ContentType_Description" ColumnName="ContentType_Description" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="KnowledgeBoxModel.Item">
+              <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+                <ScalarProperty Name="Item_Date" ColumnName="Item_Date" />
+                <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
+                <ScalarProperty Name="Item_Description" ColumnName="Item_Description" />
+                <ScalarProperty Name="Item_TagWords" ColumnName="Item_TagWords" />
+                <ScalarProperty Name="Item_FilePath" ColumnName="Item_FilePath" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ContentType_Id" ColumnName="ContentType_Id" />
+                <ScalarProperty Name="Phase_Id" ColumnName="Phase_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemSubjects">
+            <EntityTypeMapping TypeName="KnowledgeBoxModel.ItemSubject">
+              <MappingFragment StoreEntitySet="ItemSubject">
+                <ScalarProperty Name="ItemSubject_Id" ColumnName="ItemSubject_Id" />
+                <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+                <ScalarProperty Name="Subject_Id" ColumnName="Subject_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemTargets">
+            <EntityTypeMapping TypeName="KnowledgeBoxModel.ItemTarget">
+              <MappingFragment StoreEntitySet="ItemTarget">
+                <ScalarProperty Name="ItemTarget_Id" ColumnName="ItemTarget_Id" />
+                <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+                <ScalarProperty Name="Target_Id" ColumnName="Target_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Phases">
+            <EntityTypeMapping TypeName="KnowledgeBoxModel.Phase">
+              <MappingFragment StoreEntitySet="Phase">
+                <ScalarProperty Name="Phase_Id" ColumnName="Phase_Id" />
+                <ScalarProperty Name="Phase_Description" ColumnName="Phase_Description" />
+                <ScalarProperty Name="Phase_Date" ColumnName="Phase_Date" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="KnowledgeBoxModel.Subject">
+              <MappingFragment StoreEntitySet="Subject">
+                <ScalarProperty Name="Subject_Id" ColumnName="Subject_Id" />
+                <ScalarProperty Name="Subject_Description" ColumnName="Subject_Description" />
+                <ScalarProperty Name="Subject_Date" ColumnName="Subject_Date" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Targets">
+            <EntityTypeMapping TypeName="KnowledgeBoxModel.Target">
+              <MappingFragment StoreEntitySet="Target">
+                <ScalarProperty Name="Target_Id" ColumnName="Target_Id" />
+                <ScalarProperty Name="Target_Description" ColumnName="Target_Description" />
+                <ScalarProperty Name="Target_Date" ColumnName="Target_Date" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,315 @@
+﻿<style media="screen">
+  .cube_Container {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    margin: 0 auto 40px;
+    -webkit-perspective: 1000px;
+    -moz-perspective: 1000px;
+    -o-perspective: 1000px;
+    perspective: 1000px;
+  }
+
+  #cube {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition: -webkit-transform 0.5s;
+    -moz-transition: -moz-transform 0.5s;
+    -o-transition: -o-transform 0.5s;
+    transition: transform 0.5s;
+  }
+
+    #cube figure {
+      display: block;
+      position: absolute;
+      width: 196px;
+      height: 196px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #000;
+      text-align: center;
+    }
+
+    #cube.panels-backface-invisible figure {
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -o-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+
+    /*#cube .front  { background: hsla(   0, 100%, 50%, 0.7 ); }
+    #cube .back   { background: hsla(  60, 100%, 50%, 0.7 ); }
+    #cube .right  { background: hsla( 120, 100%, 50%, 0.7 ); }
+    #cube .left   { background: hsla( 180, 100%, 50%, 0.7 ); }
+    #cube .top    { background: hsla( 240, 100%, 50%, 0.7 ); }
+    #cube .bottom { background: hsla( 300, 100%, 50%, 0.7 ); }
+      */
+    #cube .front {
+      -webkit-transform: translateZ( 100px );
+      -moz-transform: translateZ( 100px );
+      -o-transform: translateZ( 100px );
+      transform: translateZ( 100px );
+    }
+
+    #cube .back {
+      -webkit-transform: rotateY( -180deg ) translateZ( 100px );
+      -moz-transform: rotateY( -180deg ) translateZ( 100px );
+      -o-transform: rotateY( -180deg ) translateZ( 100px );
+      transform: rotateY( -180deg ) translateZ( 100px );
+    }
+
+    #cube .right {
+      -webkit-transform: rotateY( 90deg ) translateZ( 100px );
+      -moz-transform: rotateY( 90deg ) translateZ( 100px );
+      -o-transform: rotateY( 90deg ) translateZ( 100px );
+      transform: rotateY( 90deg ) translateZ( 100px );
+    }
+
+    #cube .left {
+      -webkit-transform: rotateY( -90deg ) translateZ( 100px );
+      -moz-transform: rotateY( -90deg ) translateZ( 100px );
+      -o-transform: rotateY( -90deg ) translateZ( 100px );
+      transform: rotateY( -90deg ) translateZ( 100px );
+    }
+
+    #cube .top {
+      -webkit-transform: rotateX( 90deg ) translateZ( 100px );
+      -moz-transform: rotateX( 90deg ) translateZ( 100px );
+      -o-transform: rotateX( 90deg ) translateZ( 100px );
+      transform: rotateX( 90deg ) translateZ( 100px );
+    }
+
+    #cube .bottom {
+      -webkit-transform: rotateX( -90deg ) translateZ( 100px );
+      -moz-transform: rotateX( -90deg ) translateZ( 100px );
+      -o-transform: rotateX( -90deg ) translateZ( 100px );
+      transform: rotateX( -90deg ) translateZ( 100px );
+    }
+
+    #cube.show-front {
+      -webkit-transform: translateZ( -100px );
+      -moz-transform: translateZ( -100px );
+      -o-transform: translateZ( -100px );
+      transform: translateZ( -100px );
+    }
+
+    #cube.show-back {
+      -webkit-transform: translateZ( -100px ) rotateY( -180deg );
+      -moz-transform: translateZ( -100px ) rotateY( -180deg );
+      -o-transform: translateZ( -100px ) rotateY( -180deg );
+      transform: translateZ( -100px ) rotateY( -180deg );
+    }
+
+    #cube.show-right {
+      -webkit-transform: translateZ( -100px ) rotateY( -90deg );
+      -moz-transform: translateZ( -100px ) rotateY( -90deg );
+      -o-transform: translateZ( -100px ) rotateY( -90deg );
+      transform: translateZ( -100px ) rotateY( -90deg );
+    }
+
+    #cube.show-left {
+      -webkit-transform: translateZ( -100px ) rotateY( 90deg );
+      -moz-transform: translateZ( -100px ) rotateY( 90deg );
+      -o-transform: translateZ( -100px ) rotateY( 90deg );
+      transform: translateZ( -100px ) rotateY( 90deg );
+    }
+
+    #cube.show-top {
+      -webkit-transform: translateZ( -100px ) rotateX( -90deg );
+      -moz-transform: translateZ( -100px ) rotateX( -90deg );
+      -o-transform: translateZ( -100px ) rotateX( -90deg );
+      transform: translateZ( -100px ) rotateX( -90deg );
+    }
+
+    #cube.show-bottom {
+      -webkit-transform: translateZ( -100px ) rotateX( 90deg );
+      -moz-transform: translateZ( -100px ) rotateX( 90deg );
+      -o-transform: translateZ( -100px ) rotateX( 90deg );
+      transform: translateZ( -100px ) rotateX( 90deg );
+    }
+
+  .raised {
+    -webkit-box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  }
+
+
+  .dropdown-submenu {
+    position: relative;
+  }
+
+    .dropdown-submenu > .dropdown-menu {
+      top: 0;
+      left: 100%;
+      margin-top: -6px;
+      margin-left: -1px;
+      -webkit-border-radius: 0 6px 6px 6px;
+      -moz-border-radius: 0 6px 6px 6px;
+      border-radius: 0 6px 6px 6px;
+    }
+    /*.dropdown-submenu:hover>.dropdown-menu{display:block;}*/
+    .dropdown-submenu > a:after {
+      display: block;
+      content: " ";
+      float: right;
+      width: 0;
+      height: 0;
+      border-color: transparent;
+      border-style: solid;
+      border-width: 5px 0 5px 5px;
+      border-left-color: #cccccc;
+      margin-top: 5px;
+      margin-right: -10px;
+    }
+
+    .dropdown-submenu:hover > a:after {
+      border-left-color: #ffffff;
+    }
+
+    .dropdown-submenu.pull-left {
+      float: none;
+    }
+
+      .dropdown-submenu.pull-left > .dropdown-menu {
+        left: -100%;
+        margin-left: 10px;
+        -webkit-border-radius: 6px 0 6px 6px;
+        -moz-border-radius: 6px 0 6px 6px;
+        border-radius: 6px 0 6px 6px;
+      }
+</style>
+  <!--
+<section class="cube_Container">
+  <div id="cube" class="panels-backface-invisible raised">
+    <figure class="front ">
+      <div style="" class="cubeface raised">
+        <div class="list-group">
+          <a href="#" class="list-group-item active" rotate="show-right">Menu
+          </a>
+          <a href="#" class="list-group-item" rotate="show-right">Foundation Phase 1</a>
+          <a href="#" class="list-group-item" rotate="show-right">Intermediate Phase</a>
+          <a href="#" class="list-group-item" rotate="show-right">Senior</a>
+          <a href="#" class="list-group-item" rotate="show-right">Junior</a>
+          <a href="#" class="list-group-item" rotate="show-right">Adult</a><a href="~/Images/">~/Images/</a>
+        </div>
+      </div>
+    </figure>
+    <figure class="right">
+      <div class="cubeface raised">
+        <div class="list-group">
+          <a href="#" class="list-group-item active" rotate="show-front">Back
+          </a>
+          <a href="#" class="list-group-item" rotate="show-back">Literacy</a>
+          <a href="#" class="list-group-item" rotate="show-back">life Skills</a>
+          <a href="#" class="list-group-item" rotate="show-back">Numeracy</a>
+          <a href="#" class="list-group-item" rotate="show-back">&nbsp;</a>
+          <a href="#" class="list-group-item" rotate="show-back">&nbsp;</a>
+        </div>
+      </div>
+    </figure>
+    <figure class="back">
+      <div class="list-group">
+        <a href="#" class="list-group-item active" rotate="show-right">Back
+        </a>
+        <a href="#" class="list-group-item">Foundation Phase 3</a>
+        <a href="#" class="list-group-item">Intermediate Phase</a>
+        <a href="#" class="list-group-item">Senior</a>
+        <a href="#" class="list-group-item">Junior</a>
+        <a href="#" class="list-group-item">Adult</a>
+      </div>
+    </figure>
+    <figure class="left ">
+      <div class="list-group">
+        <a href="#" class="list-group-item active" rotate="show-back">Back
+        </a>
+        <a href="#" class="list-group-item">Foundation Phase 4</a>
+        <a href="#" class="list-group-item">Intermediate Phase</a>
+        <a href="#" class="list-group-item">Senior</a>
+        <a href="#" class="list-group-item">Junior</a>
+        <a href="#" class="list-group-item">Adult</a>
+      </div>
+    </figure>
+    <figure class="top "></figure>
+    <figure class="bottom "></figure>
+  </div>  
+  -->
+<style>
+
+  
+</style>
+
+<div style="height: 650px; width: 240px;background: #f6f6f6;border-right:4px solid #b3bd4d" class="swing panel">
+  <div id="MenuArea" style="padding: 10px" class="front">
+    <ul class="menucontainer">
+      <li>
+        <div class="tile css3-shadow">
+          <h4 class="orange">Foundation<br />
+          Phase</h4>
+        </div>
+      </li>
+      <li>
+        <div class="tile css3-shadow">
+          <h4 class="orange">Intermediate<br />
+          Phase</h4>
+        </div>
+      </li>
+      <li>
+        <div class="tile css3-shadow">
+          <h4 class="orange">Senior<br />
+          Phase</h4>
+        </div>
+      </li>
+      <li>
+        <div class="tile css3-shadow">
+          <h4 class="orange">F.E.T<br />
+          (Further Education and Training)</h4>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+ <!--</section>-->
+
+<script>
+  $(document).ready(
+    function () {
+      var box = $("#cube"),
+          panelClassName = 'show-front'
+      $("#mainPanel").on("click",
+        function () {
+          box.removeClass(panelClassName);
+          panelClassName = "show-right";
+          box.addClass(panelClassName);
+        });
+
+      $("#mainPanelRight").on("click",
+        function () {
+          box.removeClass(panelClassName);
+          panelClassName = "show-back";
+          box.addClass(panelClassName);
+        });
+      $(".list-group-item").on("click",
+        function () {
+          box.removeClass(panelClassName);
+          panelClassName = $(this).attr("rotate");
+          box.addClass(panelClassName);
+        });
+
+      $('.click').toggle(function () {
+        $(this).addClass('flip');
+      }, function () {
+        $(this).removeClass('flip');
+      });
+
+    });
+
+
+</script>
+
