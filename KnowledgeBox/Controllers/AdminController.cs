@@ -223,7 +223,7 @@ namespace KnowledgeBox.Controllers
         public ActionResult EditContentType(int id = 0)
         {
             KnowledgeBox.Models.ContentType item = db.ContentTypes.Find(id);
-            return View("EditContentType", item);
+            return View("EditContentType", item); 
         }
         [HttpPost]
         public ActionResult EditContentType(ContentType contentType, int id = 0)
