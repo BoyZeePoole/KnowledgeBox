@@ -11,7 +11,6 @@ namespace KnowledgeBox.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     
     public partial class Phase
     {
@@ -21,7 +20,6 @@ namespace KnowledgeBox.Models
         }
     
         public int Phase_Id { get; set; }
-        [DisplayName("Description")]
         public string Phase_Description { get; set; }
         public System.DateTime Phase_Date { get; set; }
         public int CreatedBy { get; set; }

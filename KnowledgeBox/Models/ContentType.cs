@@ -11,7 +11,6 @@ namespace KnowledgeBox.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     
     public partial class ContentType
     {
@@ -22,7 +21,6 @@ namespace KnowledgeBox.Models
     
         public int ContentType_Id { get; set; }
         public System.DateTime ContentType_Date { get; set; }
-        [DisplayName("Description")]
         public string ContentType_Description { get; set; }
         public int CreatedBy { get; set; }
     

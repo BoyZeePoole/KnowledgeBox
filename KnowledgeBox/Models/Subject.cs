@@ -11,7 +11,6 @@ namespace KnowledgeBox.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     
     public partial class Subject
     {
@@ -21,7 +20,6 @@ namespace KnowledgeBox.Models
         }
     
         public int Subject_Id { get; set; }
-        [DisplayName("Description")]
         public string Subject_Description { get; set; }
         public System.DateTime Subject_Date { get; set; }
         public int CreatedBy { get; set; }

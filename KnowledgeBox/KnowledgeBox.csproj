@@ -193,6 +193,7 @@
     </Compile>
     <Compile Include="KnowledgwBoxEntities.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AttributesClass.cs" />
     <Compile Include="Models\ContentType.cs">
       <DependentUpon>KnowledgeBoxModel.tt</DependentUpon>
     </Compile>

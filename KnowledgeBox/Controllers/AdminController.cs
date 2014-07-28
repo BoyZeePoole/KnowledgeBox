@@ -38,7 +38,6 @@ namespace KnowledgeBox.Controllers
 
             var itemSubject = db.ItemSubjects.Where(i => i.Item_Id == id);
             var arrSubject = itemSubject.Select(x => x.Subject.Subject_Id).ToArray();
-
             ViewBag.SubjectSelected = arrSubject;
 
 
@@ -51,7 +50,7 @@ namespace KnowledgeBox.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, Item item, string[] subject, string[] target, HttpPostedFileBase Item_FilePath)
+        public ActionResult Edit(Item item, string[] subject, string[] target, HttpPostedFileBase Item_FilePath, int id = 0)
         {
             if (ModelState.IsValid)
             {
@@ -99,8 +98,20 @@ namespace KnowledgeBox.Controllers
                 }
                 db.SaveChanges();
                 //return RedirectToAction("Edit", new { id = itemId });
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+
+            ViewBag.ContentType = new SelectList(db.ContentTypes.OrderBy(c => c.ContentType_Description), "ContentType_Id", "ContentType_Description");
+            ViewBag.Phase = new SelectList(db.Phases.OrderBy(c => c.Phase_Description), "Phase_Id", "Phase_Description");
+            ViewBag.Subject = new SelectList(db.Subjects.OrderBy(s => s.Subject_Description), "Subject_Id", "Subject_Description");
+            ViewBag.Target = new SelectList(db.Targets.OrderBy(s => s.Target_Description), "Target_Id", "Target_Description");
+
+
+
+            ViewBag.SubjectSelected = (subject != null) ? subject : new string[] { };
+            ViewBag.TargetSelected = (target != null) ? target : new string[] { }; ;
+            //return RedirectToAction("Index");
+            return View("Admin", item);
         }
 
         
@@ -136,8 +147,9 @@ namespace KnowledgeBox.Controllers
                     db.Entry(subject).State = System.Data.EntityState.Modified;
                 }
                 db.SaveChanges();
+                return RedirectToAction("Subject");
             }
-            return RedirectToAction("Subject");
+            return View("EditSubject", subject);
         }
 
         /// <summary>
@@ -172,8 +184,9 @@ namespace KnowledgeBox.Controllers
                     db.Entry(target).State = System.Data.EntityState.Modified;
                 }
                 db.SaveChanges();
+                return RedirectToAction("Target");
             }
-            return RedirectToAction("Target");
+            return View("EditTarget", target);
         }
 
         /// <summary>
@@ -208,8 +221,9 @@ namespace KnowledgeBox.Controllers
                     db.Entry(phase).State = System.Data.EntityState.Modified;
                 }
                 db.SaveChanges();
+                return RedirectToAction("Phase");
             }
-            return RedirectToAction("Phase");
+            return View("EditPhase", phase);
         }
         /// <summary>
         /// ContentType Actions
@@ -243,8 +257,9 @@ namespace KnowledgeBox.Controllers
                     db.Entry(contentType).State = System.Data.EntityState.Modified;
                 }
                 db.SaveChanges();
+                return RedirectToAction("ContentType");
             }
-            return RedirectToAction("ContentType");
+            return View("EditContentType", contentType);            
         }
 
     }
