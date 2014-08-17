@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+.tp70 {
+    background: url(../Images/BG70.png) repeat left top;
+}
+
 body {
 
     color: #333;
@@ -12,7 +16,7 @@ body {
     margin: 0;
     padding: 0;
     /* Experimentation*/
-    background: rgb(125,126,125);
+    background: rgb(125,126,125) url(../Images/mainBG.jpg);
 /* green*/    
 /*
     background: -moz-radial-gradient(center, ellipse cover, rgba(123,131,29,1) 0%, rgba(14,14,14,1) 100%);    
@@ -20,7 +24,7 @@ body {
     background: -ms-radial-gradient(center, ellipse cover, rgba(123,131,29,1) 0%,rgba(14,14,14,1) 100%);
     background: radial-gradient(ellipse at center, rgba(123,131,29,1) 0%,rgba(14,14,14,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=1 );  
-    */
+
      background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj4KICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM3ZDdlN2QiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMGUwZTBlIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L3JhZGlhbEdyYWRpZW50PgogIDxyZWN0IHg9Ii01MCIgeT0iLTUwIiB3aWR0aD0iMTAxIiBoZWlnaHQ9IjEwMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);  
      background: -moz-radial-gradient(center, ellipse cover,  rgba(125,126,125,1) 0%, rgba(14,14,14,1) 100%);  
      background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(125,126,125,1)), color-stop(100%,rgba(14,14,14,1)));  
@@ -28,7 +32,7 @@ body {
      background: -o-radial-gradient(center, ellipse cover,  rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%);  
      background: -ms-radial-gradient(center, ellipse cover,  rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%);  
      background: radial-gradient(ellipse at center,  rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%);  
-     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=1 );  
+     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=1 );      */
 }
 
 a {
@@ -125,7 +129,7 @@ h5, h6 {
 }
 
 header .content-wrapper {
-    padding-top: 20px;
+    padding-top: 5px;
 }
 
 footer {

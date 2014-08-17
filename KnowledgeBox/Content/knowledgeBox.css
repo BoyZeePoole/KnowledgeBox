@@ -1,205 +1,31 @@
-﻿  .tile {
-    width: 220px;
-    vertical-align: middle;
-    text-align: center;
-    color: #FFF;
-    font-weight: bold;
-    font-size: 18px;
-    margin-bottom: 5px;
-    position: relative;
-    top: 50%;
-    /*padding:10px;*/
-    background: #FFF;
-  }
-.tile h4 {
-    margin: 0;
-    padding: 34px 20px;
-    text-align: center;
-    -webkit-box-shadow: 0 0px 4px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 0px 4px rgba(0, 0, 0, 0.2);
+﻿.kb_Menu ul {
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 5px;
+    width: 980px;
+    height: 55px;
 }
-.css3-shadow{
-    position:relative;
-    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3);
-    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3);
-}
-.css3-border-shadow {
-   position:relative;
-   -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3);
-   box-shadow:0 1px 4px rgba(0, 0, 0, 0.3);
-}
-/*==================================================
- * Drop shadow effect with box-shadow
- * ===============================================*/
-.css3-shadow:after{
-    content:"";
-    position:absolute;
-    z-index:-1;
-    -webkit-box-shadow:0 0 40px rgba(0,0,0,0.8);
-    box-shadow:0 0 40px rgba(0,0,0,0.8);
-    bottom:0px;
-    left:10%;
-    right:10%;
-    width:80%;
-    height:50%;
-    -moz-border-radius:100%;
-    border-radius:100%;
+.kb_Menu ul li {
+    display: inline;
+    padding: 0px 10px;
 }
 
-
-
-
-  .magenta {
-    background: #a400ac;
-  }
-
-  .teal {
-    background: #009cae;
-  }
-
-  .lime {
-    background: #8CBF26;
-  }
-
-  .green {
-    background: #b3bd4d;
-  }
-.brown {
-    background: #A05000;
-  }
-.pink
-{
-    background: #E671B8;
-  }
-.orange{
-    background: #e68a3f;
-  }
-.blue{
-    background: #1BA1E2;
-  }
-.red{
-    background: #E51400;
-  }
-.purple {
-background: #da542d;
-}  
-.purple2 {
-background: #613dbc;
+.kb_Menu .label:hover {
+    color:rgb(102, 102, 102); 
 }
-.cool
- {
-background: #bc1d49;
-}
-
-
-@font-face {
-  font-family: 'League Gothic Regular';
-  src: url('League_Gothic.eot');
-  src: local('League Gothic Regular'), local('LeagueGothic-Regular'), url('League_Gothic.otf') format('opentype');
-}
-
-.coolheading {
-    color: #e68a3f;
-     text-shadow: 0px 1px 2px #555;
-     font-family: 'League Gothic Regular';
-}
-  
- .menucontainer {
-    list-style: none; 
-    margin-left: -40px;
-  }
- .menucontainer li{
-    margin-bottom: 20px;
- }
-
-  /* Let's try some funky stuff... Menu*/
-ul.menu {
-list-style: none; 
-border: none;
-text-align: left;
-}
-
-#menu ul {
-font-family: LeagueGothicRegular,"Arial Narrow",Arial,sans-serif;
-margin: 0;
-padding: 0;
-list-style: none;
-list-style-image: none;
-}
-
-#menu ul li a.active, #menu li a.active-trail {
-color: #fffb98;
-text-shadow: 0px 4px 6px #222;
-display: inline-block;
-clear: both;
-}
-
-.menu li{
-        background: red;
-    }
-
-#menu ul li a {
-display: block;
-color: white;
-text-decoration: none;
-padding: 4px 20px 4px 20px;
-font-size: 38px;
-line-height: 38px;
-text-shadow: 0px 1px 2px #555;
-float:left;
+.kb_Menu ul li a {
+    text-decoration:none;
+    display: inline;
+    color: rgb(255, 255, 255);
+    transition: color 0.4s ease 0s;
+    -webkit-transition: color 0.4s ease 0s;
+    display: inline-block;
+    padding: 0px 10px;
+    font: normal normal normal 18px/1.4em helvetica-w01-light, helvetica-w02-light, sans-serif;
+    text-transform:uppercase;
 
 }
-
-#menu ul li a:hover {
-background: transparent;
-text-shadow: 2px 2px 2px #555;
-color: yellow;
+.kb_Menu ul li a:hover {
+    color:rgb(102, 102, 102); 
+    background: none;
 }
-
-#menu ul li a.selected {
-background: transparent;
-text-shadow: 2px 2px 2px #555;
-color: yellow;
-}
-
-
-.swing .front,
-.swing .back {
-width: 140px;
--webkit-backface-visibility: visible;
-			-moz-backface-visibility: visible;
-					backface-visibility: visible;
-
--webkit-transition-duration: 1s;
-			-moz-transition-duration: 1s;
-					transition-duration: 1s;
-
--webkit-transform-origin: 170px 0;
-			-moz-transform-origin: 170px 0;
-					transform-origin: 170px 0;
-}
-.swing .front {
--webkit-transform: rotateY(0deg);
-			-moz-transform: rotateY(0deg);
-					transform: rotateY(0deg);
-}
-.swing .back {
-background-color: #555; /* hiding this side, so get darker */
--webkit-transform: rotateY(-180deg) translateX(198px) translateZ(2px);
-			-moz-transform: rotateY(-180deg) translateX(198px) translateZ(2px);
-}
-
-.swing.flip .front {
-background-color: #222; /* hiding this side, so get darker */
--webkit-transform: rotateY(180deg);
-			-moz-transform: rotateY(180deg);
-}
-.swing.flip .back {
-background-color: #80888f;
--webkit-transform: rotateY(0deg) translateX(198px) translateZ(2px);
-			-moz-transform: rotateY(0deg) translateX(198px) translateZ(2px);
-}
-
-
-
-

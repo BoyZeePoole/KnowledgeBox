@@ -242,6 +242,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Copy of knowledgeBox.css" />
     <Content Include="Content\cube.css" />
     <Content Include="Content\jquery.fileupload-ui.css" />
     <Content Include="Content\knowledgeBox.css" />
@@ -315,6 +316,11 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>KnowledgeBoxModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\Background-02.jpg" />
+    <Content Include="Images\BG70.png" />
+    <Content Include="Images\Cart.png" />
+    <Content Include="Images\mainBG.jpg" />
+    <Content Include="Images\searchMenu.png" />
     <Content Include="Models\KnowledgeBoxModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>KnowledgeBoxModel.edmx</DependentUpon>
@@ -328,6 +334,9 @@
       <DependentUpon>KnowledgeBoxModel.edmx</DependentUpon>
       <LastGenOutput>KnowledgeBoxModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Images\BrightMediaLogo.png" />
+    <Content Include="Images\KnowledgeBoxLogo.png" />
+    <Content Include="Images\MainPageImage.jpg" />
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="Scripts\bootstrap-multiselect.js" />
     <Content Include="Scripts\bootstrap.js" />

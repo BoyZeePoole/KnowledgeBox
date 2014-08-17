@@ -1,44 +1,59 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/css")
-        <link href="~/Content/bootstrap.css" rel="stylesheet" />
-        @Scripts.Render("~/bundles/modernizr")
-      <link href="~/Content/knowledgeBox.css" rel="stylesheet" />
+<head>
+  <meta charset="utf-8" />
+  <title>Knowledge Box</title>
+  <link href='http://fonts.googleapis.com/css?family=Jura:400,600' rel='stylesheet' type='text/css'>
+  <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <meta name="viewport" content="width=device-width" />
+  @Styles.Render("~/Content/css")
+  <link href="~/Content/bootstrap.css" rel="stylesheet" />
+  @Scripts.Render("~/bundles/modernizr")
+  <link href="~/Content/knowledgeBox.css" rel="stylesheet" />
 
-      <script src="~/Scripts/jquery-1.9.0.js"></script>
-      <script src="~/Scripts/bootstrap.js"></script>
-    </head>
-    <body>
-        <header style="width:1200px;margin:0 auto">
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">Bright Media Logo</p>
-                </div>
-                <div class="float-right">
-                    <p class="site-title">KnowledgeBox Logo</p>
-                </div>
+  <script src="~/Scripts/jquery-1.9.0.js"></script>
+  <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body>
+  <header style="width: 100%; margin: 0 auto;">
+    <div class="kb_Menu" style="background: #000000; text-align: center;">
+      <div style="width: 980px; margin: 0 auto">
+        <ul>
+          <li style="border-right: 1px solid #FFFFFF"><a href="#">Home</a></li>
+          <li style="border-right: 1px solid #FFFFFF"><a href="#">About Us</a></li>
+          <li style="border-right: 1px solid #FFFFFF"><a href="#">Contact Us</a></li>
+          <li style="border-right: 1px solid #FFFFFF"><a href="#">Search</a><img src="Images/searchMenu.png" /> </li>
+          <li style="border-right: 1px solid #FFFFFF"><a href="#">Resources</a></li>
+          <li><a href="#">My Resources</a><img style="position:relative" src="~/Images/Cart.png" /></li>
+        </ul>
+      </div>
+
+        <div style="background: rgb(102, 102, 102); height: 160px;">
+          <div style="width: 980px; margin: 0 auto;">
+            <div class="" style="float:left;">
+              <img src="~/Images/KnowledgeBoxLogo.png" />
             </div>
-            <br /><br /><br />            
-        </header>
-        <div id="body">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
-            </section>
+            <div class="" style="float:right;">
+              <img src="~/Images/BrightMediaLogo.png" />
+            </div>
+          </div>
         </div>
-        <footer>
-            <div class="">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
-                </div>
-            </div>
-        </footer>
-        
-        @RenderSection("scripts", required: false)
-    </body>
+    </div>
+  </header>
+  <div id="body">
+    @RenderSection("featured", required: false)
+    <section class="content-wrapper main-content clear-fix">
+      @RenderBody()
+    </section>
+  </div>
+  <footer>
+    <div class="">
+      <div class="float-left">
+        <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+      </div>
+    </div>
+  </footer>
+
+  @RenderSection("scripts", required: false)
+</body>
 </html>
