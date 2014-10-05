@@ -1,59 +1,87 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Knowledge Box</title>
-  <link href='http://fonts.googleapis.com/css?family=Jura:400,600' rel='stylesheet' type='text/css'>
-  <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-  <meta name="viewport" content="width=device-width" />
-  @Styles.Render("~/Content/css")
-  <link href="~/Content/bootstrap.css" rel="stylesheet" />
-  @Scripts.Render("~/bundles/modernizr")
-  <link href="~/Content/knowledgeBox.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <title>Knowledge Box</title>
+    <link href='http://fonts.googleapis.com/css?family=Jura:400,600' rel='stylesheet' type='text/css'>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/knowledgeBox.css" rel="stylesheet" />
 
-  <script src="~/Scripts/jquery-1.9.0.js"></script>
-  <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery-1.9.0.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
 </head>
 <body>
-  <header style="width: 100%; margin: 0 auto;">
-    <div class="kb_Menu" style="background: #000000; text-align: center;">
-      <div style="width: 980px; margin: 0 auto">
-        <ul>
-          <li style="border-right: 1px solid #FFFFFF"><a href="#">Home</a></li>
-          <li style="border-right: 1px solid #FFFFFF"><a href="#">About Us</a></li>
-          <li style="border-right: 1px solid #FFFFFF"><a href="#">Contact Us</a></li>
-          <li style="border-right: 1px solid #FFFFFF"><a href="#">Search</a><img src="Images/searchMenu.png" /> </li>
-          <li style="border-right: 1px solid #FFFFFF"><a href="#">Resources</a></li>
-          <li><a href="#">My Resources</a><img style="position:relative" src="~/Images/Cart.png" /></li>
-        </ul>
-      </div>
-
-        <div style="background: rgb(102, 102, 102); height: 160px;">
-          <div style="width: 980px; margin: 0 auto;">
-            <div class="" style="float:left;">
-              <img src="~/Images/KnowledgeBoxLogo.png" />
+    <header style="width: 100%; margin: 0 auto;">
+        <div class="kb_Menu" style="background: #000000; text-align: center;">
+            <div style="width: 980px; margin: 0 auto">
+                <ul>
+                    <li style="border-right: 1px solid #FFFFFF">@Html.ActionLink("Home", "Index")</li>
+                    <li style="border-right: 1px solid #FFFFFF">@Html.ActionLink("About", "About")</li>
+                    <li style="border-right: 1px solid #FFFFFF">@Html.ActionLink("Contact Us", "Contact")</li>
+                    <li style="border-right: 1px solid #FFFFFF">@Html.ActionLink("Search", "Search")<img src="/Images/searchMenu.png" /></li>
+                    <li style="border-right: 1px solid #FFFFFF" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources </a>
+                        <ul class="dropdown-menu" role="menu" style="width:auto;height:auto;font-weight:normal;font-size:13px">                            
+                            <li style="line-height:30px">@Html.ActionLink("Foundation Phase", "Foundation", null, new {style="font-size:13px;color:#000" })</li>
+                            <li style="line-height:30px"><a style="font-size:13px;color:#000" href="#">Intermediate Phase</a></li>
+                            <li style="line-height:30px">@Html.ActionLink("Senior Phase", "Senior", null, new { style = "font-size:13px;color:#000" })</li>
+                            <li style="line-height:30px">@Html.ActionLink("FET", "Further", null, new { style = "font-size:13px;color:#000" })</li>
+                            <li style="line-height:30px"><a style="font-size:13px;color:#000" href="#">Teachers cool Tools</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">My Resources</a><img style="position:relative" src="~/Images/Cart.png" /></li>
+                </ul>
             </div>
-            <div class="" style="float:right;">
-              <img src="~/Images/BrightMediaLogo.png" />
+            <div style="background: rgb(102, 102, 102); height: 160px;">
+                <div style="width: 980px; margin: 0 auto;">
+                    <div class="" style="float:left;">
+                        <img src="~/Images/KnowledgeBoxLogo.png" />
+                    </div>
+                    <div class="" style="float:right;">
+                        <img src="~/Images/BrightMediaLogo.png" />
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
+    </header>
+    <div id="body">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
     </div>
-  </header>
-  <div id="body">
-    @RenderSection("featured", required: false)
-    <section class="content-wrapper main-content clear-fix">
-      @RenderBody()
-    </section>
-  </div>
-  <footer>
-    <div class="">
-      <div class="float-left">
-        <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
-      </div>
-    </div>
-  </footer>
-
-  @RenderSection("scripts", required: false)
+    <footer>
+        <div class="container" style="width: 980px;padding-right: 0px;padding-left: 0px;margin-right: auto;margin-left: auto">
+            <div class="row" style="margin:0">
+                <div class="col-md-12" style="color: #FFF; z-index:100">
+                    <div class="col-md-4" style="font-family: helvetica-w01-light, helvetica-w02-light, sans-serif;font-size: 14px;">
+                        <br />
+                        Contact Us<br />
+                        <div style="padding:6px 0 6px 0"><a class="orangeLink" style="color:#fff" href="ingrid@brightmedia.co.za">ingrid@brightmedia.co.za</a></div>
+                        <div style="padding: 6px 0 6px 0"><a class="orangeLink" style="color:#fff" href="cheryl@brightmedia.co.za">cheryl@brightmedia.co.za</a></div>
+                        <div style="padding: 6px 0 6px 0">+27 83 557 6545</div>
+                    </div>
+                    <div class="col-md-4" style="font-family: helvetica-w01-light, helvetica-w02-light, sans-serif;font-size: 14px;">
+                        <br />
+                        @Html.ActionLink("Legal Disclaimer", "Legal", null, new { @class = "orangeLink", style = "color:#fff" })
+                    </div>
+                    <div class="col-md-4" style="font-family: helvetica-w01-light, helvetica-w02-light, sans-serif;font-size: 14px;">
+                        <br />
+                        <div style="color:#FFF">
+                            Let's Connect
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="color: #FFF; z-index: 100; margin-right: auto; margin-left: auto;text-align:center">
+                        © 2014 Bright Media
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -1,48 +1,81 @@
 ﻿@{
-  ViewBag.Title = "Home Page";
+    ViewBag.Title = "Home Page";
 }
 <style>
-
-
-.nav li a {
-color: white;text-decoration: none;font-size: 38px;text-shadow: 0px 1px 2px #555;
-}
-
+    .nav li a {
+        color: white;
+        text-decoration: none;
+        font-size: 38px;
+        text-shadow: 0px 1px 2px #555;
+    }
 </style>
-<div class="container" style="height: 712px; width: 980px;padding-right: 0px;padding-left: 0px;margin-right: auto;margin-left: auto">
-  <div class="row" style="margin:0">
-    <div class="col-md-12" style="background: #FFF; z-index:100">
-      <div style="height:301px; background: #FFFFFF url(Images/MainPageImage.jpg) no-repeat center; margin: 0 auto; font: normal normal normal 32px/1.4em jura, sans-serif;text-align: center;vertical-align:middle;text-shadow: rgba(0, 0, 0, 0.4) 0px 4px 5px;color: #FFFFFF">      
-         <br />- The Knowledge Box -<br />
-        filled with exciting resources for you<br /><br />
-        Free resources for Teachers, Parents and Learners
-      </div>
+<div class="container" style="height: 712px; width: 980px;padding-top:20px;padding-right: 0px;padding-left: 0px;margin-right: auto;margin-left: auto">
+    <div class="row" style="margin:0">
+        <div class="col-md-12" style="background: #FFF; z-index:100">
+            <div style="height:301px; background: #FFFFFF url(/Images/MainPageImage.jpg) no-repeat center; margin: 0 auto; font: normal normal normal 32px/1.4em jura, sans-serif;text-align: center;vertical-align:middle;text-shadow: rgba(0, 0, 0, 0.8) 0px 4px 5px;color: #FFFFFF">
+                <br />- The Knowledge Box -<br />
+                filled with exciting resources for you<br /><br />
+                Free resources for Teachers, Parents and Learners
+            </div>
+        </div>
+        <div class="col-md-6" style="background: #FFF; z-index:100;margin-top:12px;padding:20px;">
+            <b>WHAT IS THE KNOWLEDGE BOX ALL ABOUT?</b><br />
+            <ul>
+                <li>
+                    The Knowledge Box website serves as a hub which is accessible to all users, in order to download subject resources, cool teaching tools, interesting videos, PowerPoint presentations, audio files, PDFs (posters, resource books) to make learning interesting and easier for teachers, learners and their parents. ALL for FREE!
+                </li>
+            </ul><br />
+            <b>HOW DOES IT WORK?</b><br /><br />
+            <ul>
+                <li>
+                    You can either use the SEARCH tool (in the menu bar) by typing in search words relevant to the subject or topic for which you need resources.
+                </li>
+            </ul>
+            <div style="text-align:center">OR</div>
+            <ul>
+                <li>
+                    You can BROWSE through the content and see what is available.
+                </li>
+            </ul>
+            <br />
+            <span style="font-weight:bold; color: rgb(242, 145, 41);">Select one of the buttons on the right and enjoy all the resources.</span>
+        </div>
+        <div class="col-md-6" style="z-index:100;margin-top:12px;padding:20px;">
+            <br /><br />
+            <a href="@Url.Action("Phases", "Home")" class="orangeLink">
+                <div class="orangeButton">
+                    <span style="line-height:84px">Browse through our resources HERE</span>
+                </div>
+            </a><br /><br />
+            <a href="@Url.Action("Search", "Home")" class="orangeLink">
+                <div class="orangeButton">
+                    <span style="line-height:84px">Search for a specific resource HERE</span>
+                </div>
+            </a>
+        </div>
+        <br /><br />
+        <div class="col-md-12" style="background: #FFF; z-index:100;margin-top:20px;">
+            <div class="col-md-7" style="background: #FFF; z-index:100;margin-top:12px;padding:20px;">
+                <div style="text-align:center;font-weight:bold">
+                    Introducing our full-length and portable<br />
+                    touch screen self-service kiosks?
+                </div><br /><br />
+                <ul>
+                    <li>Bright Media has placed these kiosks in prominent areas across the country where teachers, learners and parents can access them to download wonderful resources - for free!</li>
+                    <li>Should you be interested in purchasing a customisable kiosk for your educational institution, please contact Bright Media sales at <a href="mailto:ingrid@brightmedia.co.za">ingrid@brightmedia.co.za</a></li>
+                </ul>
+                <div style="text-align:center;font-weight:bold">
+                    The portable kiosk <br />Knowldege Box<br />
+                    unit <br /><br />
+                    <img src="~/Images/KnowledgeBox.jpg" />
+                </div>
+            </div>
+            <div class="col-md-5" style="background: #FFF; z-index:100;margin-top:12px;padding:20px;">
+                <div style="text-align:center;font-weight:bold">
+                    The full-length kiosk<br /> Knowldege Box unit <br /><br />
+                    <img src="~/Images/PointKnowledgeBox.jpg" />
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-6" style="background: #FFF; z-index:100;margin-top:12px;padding:20px;">
-      <b>WHAT IS THE KNOWLEDGE BOX  ALL ABOUT?</b><br />
-      <ul>
-        <li>
-          The Knowledge Box website serves as a hub which is accessible to all users, in order to download subject resources, cool teaching tools, interesting videos, PowerPoint presentations, audio files, PDFs (posters, resource books) to make learning interesting and easier for teachers, learners and their parents. ALL for FREE!
-        </li>
-      </ul><br /> 
-      <b>HOW DOES IT WORK?</b><br />
-      <ul>
-        <li>
-          You can either use the SEARCH tool (in the menu bar) by typing in search words relevant to the subject or topic for which you need resources.
-        </li>
-        </ul>
-      <div style="text-align:center">OR</div>
-                                                                    OR
-      <ul>
-        <li>
-          You can BROWSE through the content and see what is available.
-        </li>
-      </ul> 
-      
-
-      
-      <br />
-      Select one of the buttons on the right and enjoy all the resources.
-    </div>
-  </div>
 </div>

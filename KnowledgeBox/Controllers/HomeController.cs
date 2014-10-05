@@ -28,5 +28,45 @@ namespace KnowledgeBox.Controllers
 
             return View();
         }
+
+        public ActionResult Legal()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        public ActionResult Search()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        public ActionResult Foundation()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        public ActionResult Senior()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+        public ActionResult Further()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+        public ActionResult Phases()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
     }
 }

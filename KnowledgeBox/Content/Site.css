@@ -121,7 +121,7 @@ h5, h6 {
 
 .main-content {
     padding-left: 10px;
-    padding-top: 30px;
+    /*padding-top: 30px;*/
 }
 
 .featured + .main-content {
@@ -134,9 +134,9 @@ header .content-wrapper {
 
 footer {
     clear: both;
-    background-color: #000000;
+    background-color: rgb(102, 102, 102);
     font-size: .8em;
-    height: 50px;
+    height: 150px;
 }
 
 

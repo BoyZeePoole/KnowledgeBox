@@ -244,6 +244,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Copy of knowledgeBox.css" />
     <Content Include="Content\cube.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\jquery.fileupload-ui.css" />
     <Content Include="Content\knowledgeBox.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -316,11 +317,31 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>KnowledgeBoxModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\About.jpg" />
     <Content Include="Images\Background-02.jpg" />
     <Content Include="Images\BG70.png" />
     <Content Include="Images\Cart.png" />
+    <Content Include="Images\CreativeArtsRes.jpg" />
+    <Content Include="Images\EconomicManagementRes.jpg" />
+    <Content Include="Images\KnowledgeBox.jpg" />
+    <Content Include="Images\LanguageRes.jpg" />
+    <Content Include="Images\LifeOrientationRes.jpg" />
+    <Content Include="Images\LifeSkills.jpg" />
+    <Content Include="Images\LiteracyRes.jpg" />
     <Content Include="Images\mainBG.jpg" />
+    <Content Include="Images\MathenaticsRes.jpg" />
+    <Content Include="Images\NaturalSciencesRes.jpg" />
+    <Content Include="Images\NumeracyRes.jpg" />
+    <Content Include="Images\Phases_CoolToolsPhase.jpg" />
+    <Content Include="Images\Phases_FETPhase.jpg" />
+    <Content Include="Images\Phases_FoundationPhase.jpg" />
+    <Content Include="Images\Phases_IntermediatePhase.jpg" />
+    <Content Include="Images\Phases_SeniorPhase.jpg" />
+    <Content Include="Images\PointKnowledgeBox.jpg" />
+    <Content Include="Images\Search.jpg" />
     <Content Include="Images\searchMenu.png" />
+    <Content Include="Images\SocialSciencesRes.jpg" />
+    <Content Include="Images\TechnologyRes.jpg" />
     <Content Include="Models\KnowledgeBoxModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>KnowledgeBoxModel.edmx</DependentUpon>
@@ -337,6 +358,10 @@
     <Content Include="Images\BrightMediaLogo.png" />
     <Content Include="Images\KnowledgeBoxLogo.png" />
     <Content Include="Images\MainPageImage.jpg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\LiberationSans-Regular.ttf" />
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="Scripts\bootstrap-multiselect.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -412,6 +437,12 @@
     <Content Include="Views\Admin\Phase.cshtml" />
     <Content Include="Views\Admin\ContentType.cshtml" />
     <Content Include="Views\Admin\EditContentType.cshtml" />
+    <Content Include="Views\Home\Legal.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Home\Foundation.cshtml" />
+    <Content Include="Views\Home\Senior.cshtml" />
+    <Content Include="Views\Home\Further.cshtml" />
+    <Content Include="Views\Home\Phases.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

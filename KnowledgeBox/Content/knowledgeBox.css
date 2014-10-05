@@ -1,20 +1,27 @@
-﻿.kb_Menu ul {
+﻿@font-face {
+    font-family: 'Liberation';
+    src: url('LiberationSans-Regular.ttf') format('truetype');
+}
+
+.kb_Menu ul {
     list-style-type: none;
     margin: 0 auto;
     padding: 5px;
     width: 980px;
     height: 55px;
 }
-.kb_Menu ul li {
-    display: inline;
-    padding: 0px 10px;
-}
+
+    .kb_Menu ul li {
+        display: inline;
+        padding: 0px 10px;
+    }
 
 .kb_Menu .label:hover {
-    color:rgb(102, 102, 102); 
+    color: rgb(102, 102, 102);
 }
+
 .kb_Menu ul li a {
-    text-decoration:none;
+    text-decoration: none;
     display: inline;
     color: rgb(255, 255, 255);
     transition: color 0.4s ease 0s;
@@ -22,10 +29,53 @@
     display: inline-block;
     padding: 0px 10px;
     font: normal normal normal 18px/1.4em helvetica-w01-light, helvetica-w02-light, sans-serif;
-    text-transform:uppercase;
+    text-transform: uppercase;
+}
 
+    .kb_Menu ul li a:hover {
+        color: rgb(102, 102, 102);
+        background: none;
+    }
+
+
+
+
+.orangeButton {
+    font: normal normal bold 17px/1.4em helvetica-w01-light, helvetica-w02-light, sans-serif;
+    background-color: rgb(242, 145, 41);
+    transition: border-color 0.4s ease 0s, background-color 0.4s ease 0s;
+    -webkit-transition: border-color 0.4s ease 0s, background-color 0.4s ease 0s;
+    box-shadow: rgba(0, 0, 0, 0.6) 0px 1px 4px 0px;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    text-align: center;
 }
-.kb_Menu ul li a:hover {
-    color:rgb(102, 102, 102); 
-    background: none;
+
+    .orangeButton:hover {
+        font: normal normal bold 17px/1.4em helvetica-w01-light, helvetica-w02-light, sans-serif;
+        background-color: rgb(255, 255, 255);
+        transition: border-color 0.4s ease 0s, background-color 0.4s ease 0s;
+        -webkit-transition: border-color 0.4s ease 0s, background-color 0.4s ease 0s;
+        box-shadow: rgba(0, 0, 0, 0.6) 0px 1px 4px 0px;
+        cursor: pointer;
+        color: rgb(102, 102, 102);
+    }
+
+    .orangeButtonBig {
+        width: 424px;
+        min-height: 84px;
+    }
+
+    .orangeButtonSmall {
+        width: 200px;
+        min-height: 40px;
+    }
+
+a.orangeLink {
+    text-decoration: none;
 }
+
+    a.orangeLink:hover {
+        text-decoration: none;
+        background: none;
+    }
