@@ -198,6 +198,9 @@
     <Compile Include="KnowledgwBoxEntities.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AttributesClass.cs" />
+    <Compile Include="Models\Cart.cs">
+      <DependentUpon>KnowledgeBoxModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ContentType.cs">
       <DependentUpon>KnowledgeBoxModel.tt</DependentUpon>
     </Compile>
@@ -367,6 +370,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\LiberationSans-Regular.ttf" />
+    <None Include="Properties\PublishProfiles\KnowledgeBox.pubxml" />
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="Scripts\bootstrap-multiselect.js" />
     <Content Include="Scripts\bootstrap.js" />

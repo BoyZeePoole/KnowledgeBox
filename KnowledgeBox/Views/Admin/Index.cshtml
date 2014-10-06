@@ -21,7 +21,7 @@
             </th>
           </tr>
         </thead>
-        @foreach (var item in Model.Items)
+        @foreach (var item in Model.Items.OrderByDescending(itm=>itm.Item_Date))
         {
           <tr>
             <td>@item.Item_Name</td>

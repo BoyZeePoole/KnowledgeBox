@@ -18,6 +18,7 @@ namespace KnowledgeBox.Models
         {
             this.ItemSubjects = new HashSet<ItemSubject>();
             this.ItemTargets = new HashSet<ItemTarget>();
+            this.Carts = new HashSet<Cart>();
         }
     
         public int Item_Id { get; set; }
@@ -35,5 +36,6 @@ namespace KnowledgeBox.Models
         public virtual Phase Phase { get; set; }
         public virtual ICollection<ItemSubject> ItemSubjects { get; set; }
         public virtual ICollection<ItemTarget> ItemTargets { get; set; }
+        public virtual ICollection<Cart> Carts { get; set; }
     }
 }

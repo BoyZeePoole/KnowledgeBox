@@ -18,6 +18,8 @@
         <AssociationConnector Association="KnowledgeBoxModel.FK_ItemTarget_Item" ManuallyRouted="false" />
         <AssociationConnector Association="KnowledgeBoxModel.FK_ItemSubject_Subject" ManuallyRouted="false" />
         <AssociationConnector Association="KnowledgeBoxModel.FK_ItemTarget_Target" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="KnowledgeBoxModel.Cart" Width="1.5" PointX="5" PointY="4.875" />
+        <AssociationConnector Association="KnowledgeBoxModel.FK_Cart_Item1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

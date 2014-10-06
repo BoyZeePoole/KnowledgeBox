@@ -32,5 +32,6 @@ namespace KnowledgeBox.Models
         public DbSet<Phase> Phases { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Target> Targets { get; set; }
+        public DbSet<Cart> Carts { get; set; }
     }
 }
