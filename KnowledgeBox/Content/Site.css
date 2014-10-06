@@ -15,8 +15,12 @@ body {
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     margin: 0;
     padding: 0;
+    background-image: url(../Images/Background-02.jpg);
+    background-size:contain;
+
     /* Experimentation*/
-    background: rgb(125,126,125) url(../Images/mainBG.jpg);
+    /*background: rgb(125,126,125) url(../Images/Background-02.jpg) 100% 100% no-repeat fixed;*/
+
 /* green*/    
 /*
     background: -moz-radial-gradient(center, ellipse cover, rgba(123,131,29,1) 0%, rgba(14,14,14,1) 100%);    
