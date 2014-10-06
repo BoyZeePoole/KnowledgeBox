@@ -3,6 +3,19 @@
   ViewBag.Title = "EditSubject";
 }
 
+<link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
+<link href="~/Content/jquery.fileupload-ui.css" rel="stylesheet" />
+<style>
+    a:hover {
+        text-decoration: none;
+        background: transparent;
+    }
+</style>
+
+<script src="~/Scripts/bootstrap-multiselect.js"></script>
+<script src="~/Scripts/jquery.ui.widget.js"></script>
+<script src="~/Scripts/jquery.iframe-transport.js"></script>
+<script src="~/Scripts/jquery.fileupload.js"></script>
 
 <div class="container" style="height: 712px; width: 1200px; padding-right: 0px; padding-left: 0px; margin-right: auto; margin-left: auto">
   <div class="navbar navbar-inverse" role="navigation" style="border-radius: 0px; margin-bottom: 0px; background: #b3bd4d; border: none; border-top-left-radius: 3px; border-top-right-radius: 3px;">
@@ -21,7 +34,19 @@
             @Html.TextBoxFor(m => m.Subject_Description, new { @class = "form-control", id = "name", placeholder = "Enter name" })
           </div>
         </div>      
-      
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Subject_Thumbnail, new { @class = "col-sm-2 control-label", @for = "file" })
+                    <div class="col-sm-5">
+                        @Html.TextBoxFor(m => m.Subject_Thumbnail, new { @class = "form-control", id = "Subject_Thumbnail", placeholder = "Add Thumbnail" })
+                    </div>
+                    <div class="col-sm-1">
+                        <span class="btn btn-success fileinput-button">
+                            <i class="icon-plus icon-white"></i>
+                            <span>Add thumbnail</span>
+                            <input id="fileupload" class="btn btn-default" type="file" name="file" data-url="/Upload/UploadHandler.ashx" multiple>
+                        </span>
+                    </div>
+                </div>      
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-default">Save</button>            
@@ -33,6 +58,18 @@
       }
     </div>
   </div>
-
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var fileName = $('#file').val();
+        $('.fileinput-filename').text(fileName);
+
+        $('#fileupload').fileupload({
+            dataType: 'json',
+            done: function (e, data) {
+                $('#Subject_Thumbnail').val(data.result[0].name);
+            }
+        });
+    });
+</script>
 

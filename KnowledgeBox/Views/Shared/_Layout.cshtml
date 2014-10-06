@@ -19,17 +19,17 @@
         <div class="kb_Menu" style="background: #000000; text-align: center;">
             <div style="width: 980px; margin: 0 auto">
                 <ul>
-                    <li style="border-right: 1px solid #FFFFFF">@Html.ActionLink("Home", "Index")</li>
-                    <li style="border-right: 1px solid #FFFFFF">@Html.ActionLink("About", "About")</li>
-                    <li style="border-right: 1px solid #FFFFFF">@Html.ActionLink("Contact Us", "Contact")</li>
-                    <li style="border-right: 1px solid #FFFFFF">@Html.ActionLink("Search", "Search")<img src="/Images/searchMenu.png" /></li>
+                    <li style="border-right: 1px solid #FFFFFF">@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li style="border-right: 1px solid #FFFFFF">@Html.ActionLink("About", "About", "Home")</li>
+                    <li style="border-right: 1px solid #FFFFFF">@Html.ActionLink("Contact Us", "Contact", "Home")</li>
+                    <li style="border-right: 1px solid #FFFFFF">@Html.ActionLink("Search", "Search", "Home")<img src="/Images/searchMenu.png" /></li>
                     <li style="border-right: 1px solid #FFFFFF" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources </a>
                         <ul class="dropdown-menu" role="menu" style="width:auto;height:auto;font-weight:normal;font-size:13px">                            
-                            <li style="line-height:30px">@Html.ActionLink("Foundation Phase", "Foundation", null, new {style="font-size:13px;color:#000" })</li>
+                            <li style="line-height:30px">@Html.ActionLink("Foundation Phase", "Foundation", "Home", null, new {style="font-size:13px;color:#000" })</li>
                             <li style="line-height:30px"><a style="font-size:13px;color:#000" href="#">Intermediate Phase</a></li>
-                            <li style="line-height:30px">@Html.ActionLink("Senior Phase", "Senior", null, new { style = "font-size:13px;color:#000" })</li>
-                            <li style="line-height:30px">@Html.ActionLink("FET", "Further", null, new { style = "font-size:13px;color:#000" })</li>
+                            <li style="line-height:30px">@Html.ActionLink("Senior Phase", "Senior", "Home", null, new { style = "font-size:13px;color:#000" })</li>
+                            <li style="line-height:30px">@Html.ActionLink("FET", "Further", "Home", null, new { style = "font-size:13px;color:#000" })</li>
                             <li style="line-height:30px"><a style="font-size:13px;color:#000" href="#">Teachers cool Tools</a></li>
                         </ul>
                     </li>

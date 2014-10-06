@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\packages\DotNetZip.1.9.3\lib\net20\Ionic.Zip.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -186,6 +189,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Custom\ZipResult.cs" />
     <Compile Include="DBContext.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -224,6 +228,7 @@
     <Compile Include="Models\Phase.cs">
       <DependentUpon>KnowledgeBoxModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SearchResultModel.cs" />
     <Compile Include="Models\Subject.cs">
       <DependentUpon>KnowledgeBoxModel.tt</DependentUpon>
     </Compile>
@@ -443,6 +448,7 @@
     <Content Include="Views\Home\Senior.cshtml" />
     <Content Include="Views\Home\Further.cshtml" />
     <Content Include="Views\Home\Phases.cshtml" />
+    <Content Include="Views\Admin\SearchResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

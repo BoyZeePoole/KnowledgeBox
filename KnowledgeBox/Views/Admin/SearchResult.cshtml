@@ -1,0 +1,84 @@
+﻿@model KnowledgeBox.Models.SearchResultModel
+@{
+    ViewBag.Title = "SearchResult";
+}
+
+<div class="container" style="height: 712px; width: 980px;padding-top:20px;padding-right: 0px;padding-left: 0px;margin-right: auto;margin-left: auto">
+    <div class="row" style="margin:0">
+        <div class="col-md-12" style="z-index:100">
+            <div style="text-align: center; font-family: Liberation;color:#FFF;font-size:30px">
+                @Model.Title  @Model.Subject
+                <img src="/Files/@Model.ImageName" />
+            </div>
+            <div style="">
+                <a href="@Model.PhaseLink" class="orangeLink">
+                    <div class="orangeButton orangeButtonSmall" style="padding-top:8px;width:250px">
+                        <span>< Back to @Model.Title</span>
+                    </div>
+                </a>
+            </div>
+            @foreach (var item in Model.Items)
+            {                
+                <div style="background: rgb(242, 145, 41);height: 54px; margin-top: 12px;">
+                    <img style="float:left" src="/Files/@item.ContentType.ContentType_Thumbnail" />
+                    <div style="width:600px; height:100%; line-height:50px;float:left;margin-left:10px">@item.Item_Description</div>
+                    
+                    <div style="height: 100%; line-height: 50px; float: left; margin-left: 10px">
+                        <div style="cursor:pointer" class="viewer" data-toggle="modal" data-target="#myModal" data-file="@item.Item_FilePath" data-contenttype="@item.ContentType.ContentType_Description">View</div>
+                    </div>
+                    <div style="height: 100%; line-height: 50px; float: left; margin-left: 10px">Add to Cart</div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    /*
+    <iframe src="http://docs.google.com/gview?url=http://path.com/to/your/pdf.pdf&embedded=true" 
+    style="width:600px; height:500px;" frameborder="0"></iframe>
+    */
+    $(document).ready(function () {
+        $(".viewer").click(function () {
+            var contentType = $(this).data("contenttype");
+            var file = $(this).data("file");
+            switch (contentType)
+            {
+                case "PDF File":
+                    OpenPdf(file);
+                    break;
+                case "Image":
+                    OpenImage(file);
+                    break;
+            }            
+        })
+    })
+    var OpenPdf = function (file) {
+        var htmlString = "<iframe src=\"http://docs.google.com/gview?url={{myPDFFile}}&embedded=true\" style=\"width:600px; height:500px;\" frameborder=\"0\"></iframe>";
+        htmlString = htmlString.replace("{{myPDFFile}}", "/Files/" + file);        
+        $(".modal-body").html(htmlString);
+    }
+    var OpenImage = function (file) {
+        var imageSource = "<img src=\"/Files/"+file+"\">"
+        $(".modal-body").html(imageSource);
+    }
+
+</script>

@@ -9,6 +9,7 @@
           <tr>
             <th>Description</th>
             <th>Date</th>
+            <th>Thumbnail</th>
             <th>
               <a href="@Url.Action("EditContentType")">
                 <i class="glyphicon glyphicon-plus"></i>
@@ -22,6 +23,12 @@
           <tr>
             <td>@item.ContentType_Description</td>
             <td>@item.ContentType_Date.ToString("MMM dd yyy")</td>
+              @if (!string.IsNullOrEmpty(@item.ContentType_Thumbnail))
+              { <td><img style="height:37px" src="/Files/@item.ContentType_Thumbnail" /></td>}
+              else
+              {
+              <td></td>
+              }
             <td>
               <a href="@Url.Action("EditContentType", new { id = @item.ContentType_Id})">
                 <i class="glyphicon glyphicon-pencil"></i>

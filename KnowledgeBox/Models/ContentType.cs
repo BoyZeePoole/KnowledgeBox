@@ -23,6 +23,7 @@ namespace KnowledgeBox.Models
         public System.DateTime ContentType_Date { get; set; }
         public string ContentType_Description { get; set; }
         public int CreatedBy { get; set; }
+        public string ContentType_Thumbnail { get; set; }
     
         public virtual ICollection<Item> Items { get; set; }
     }

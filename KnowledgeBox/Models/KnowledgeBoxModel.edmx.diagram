@@ -5,13 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="dadff07c0c6a450ebc119f684a216e3c" Name="Diagram1" DisplayType="false">
-        <EntityTypeShape EntityType="KnowledgeBoxModel.ContentType" Width="1.5" PointX="0.5" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="KnowledgeBoxModel.Item" Width="1.5" PointX="2.375" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="KnowledgeBoxModel.ItemSubject" Width="1.5" PointX="4" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="KnowledgeBoxModel.ItemTarget" Width="1.5" PointX="4.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KnowledgeBoxModel.ContentType" Width="1.875" PointX="0.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KnowledgeBoxModel.Item" Width="1.5" PointX="3.625" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KnowledgeBoxModel.ItemSubject" Width="1.5" PointX="6.625" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KnowledgeBoxModel.ItemTarget" Width="1.5" PointX="6.125" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="KnowledgeBoxModel.Phase" Width="1.5" PointX="0.5" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="KnowledgeBoxModel.Subject" Width="1.5" PointX="5.875" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="KnowledgeBoxModel.Target" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KnowledgeBoxModel.Subject" Width="1.5" PointX="9.375" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KnowledgeBoxModel.Target" Width="1.5" PointX="9" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="KnowledgeBoxModel.FK_Item_ContentType" ManuallyRouted="false" />
         <AssociationConnector Association="KnowledgeBoxModel.FK_Item_Phase" ManuallyRouted="false" />
         <AssociationConnector Association="KnowledgeBoxModel.FK_ItemSubject_Item" ManuallyRouted="false" />

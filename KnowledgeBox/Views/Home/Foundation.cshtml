@@ -12,20 +12,25 @@
             <div class="col-md-4" style="">
                 <div style="margin-right: auto; margin-left: auto;width:220px; text-align: center; font-family: Liberation; color: #FFF; font-size: 18px; font-weight: bold; background: rgb(242, 145, 41); padding: 20px">
                     Literary Resources<br />
-                    <@*a href="@Url.Action("About", "Home")" class="something"><img src="~/Images/LiteracyRes.jpg" /></a>*@
+                    <a href="@Url.Action("SearchResult", "Admin", new { @phaseId = 1, @subjectId = 3, @pageLink="/Home/Foundation" })">
                         <img src="~/Images/LiteracyRes.jpg" />
+                    </a>
                 </div>
             </div>
             <div class="col-md-4">
                 <div style="width:262px;text-align: center; font-family: Liberation; color: #FFF; font-size: 18px; font-weight:bold;background: rgb(242, 145, 41);padding:20px;margin-top:100px">
                     Numeracy Resources<br />
-                    <img src="~/Images/NumeracyRes.jpg" />
+                    <a href="@Url.Action("SearchResult", "Admin", new { @phaseId = 1, @subjectId = 5, @pageLink="/Home/Foundation" })">
+                        <img src="~/Images/NumeracyRes.jpg" />
+                    </a>
                 </div>
             </div>
             <div class="col-md-4">
                 <div style="width:277px;text-align: center; font-family: Liberation; color: #FFF; font-size: 18px; font-weight:bold;background: rgb(242, 145, 41);padding:20px">
                     Life Skills Resources<br />
-                    <img src="~/Images/LifeSkills.jpg" />
+                    <a href="@Url.Action("SearchResult", "Admin", new { @phaseId = 1, @subjectId = 4, @pageLink="/Home/Foundation" })">
+                        <img src="~/Images/LifeSkills.jpg" />
+                    </a>
                 </div>
             </div>
         </div>

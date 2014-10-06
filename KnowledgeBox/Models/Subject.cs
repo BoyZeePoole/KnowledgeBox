@@ -23,6 +23,7 @@ namespace KnowledgeBox.Models
         public string Subject_Description { get; set; }
         public System.DateTime Subject_Date { get; set; }
         public int CreatedBy { get; set; }
+        public string Subject_Thumbnail { get; set; }
     
         public virtual ICollection<ItemSubject> ItemSubjects { get; set; }
     }

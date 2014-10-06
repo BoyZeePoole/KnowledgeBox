@@ -29,6 +29,7 @@ namespace KnowledgeBox.Models
         public Nullable<int> CreatedBy { get; set; }
         public int ContentType_Id { get; set; }
         public int Phase_Id { get; set; }
+        public string Item_SystemFileName { get; set; }
     
         public virtual ContentType ContentType { get; set; }
         public virtual Phase Phase { get; set; }

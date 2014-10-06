@@ -56,6 +56,11 @@ namespace KnowledgeBox.Models
         [Required(ErrorMessage = "The content type field is required...")]
         [DisplayName("Description")]
         public string ContentType_Description { get; set; }
+
+        [Required(ErrorMessage = "The content type Thumbnail is Required...")]
+        [DisplayName("Thumbnail")]
+        public string ContentType_Thumbnail { get; set; }
+        
     }
 
     public class SubjectMetadata
@@ -63,6 +68,10 @@ namespace KnowledgeBox.Models
         [Required(ErrorMessage = "The subject field is required...")]
         [DisplayName("Description")]
         public string Subject_Description { get; set; }
+
+        [DisplayName("Thumbnail")]
+        public string Subject_Thumbnail { get; set; }
+
     }
     public class TargetMetadata
     {

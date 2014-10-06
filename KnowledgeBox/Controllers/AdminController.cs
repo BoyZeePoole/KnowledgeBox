@@ -240,7 +240,7 @@ namespace KnowledgeBox.Controllers
             return View("EditContentType", item); 
         }
         [HttpPost]
-        public ActionResult EditContentType(ContentType contentType, int id = 0)
+        public ActionResult EditContentType(ContentType contentType, HttpPostedFileBase ContentType_Thumbnail, int id = 0)
         {
             if (ModelState.IsValid)
             {
@@ -262,5 +262,25 @@ namespace KnowledgeBox.Controllers
             return View("EditContentType", contentType);            
         }
 
+        public ActionResult SearchResult(int phaseId, int subjectId, string pageLink)
+        {
+            //var items = new List<Item>();
+            var items = from i in db.Items
+                         from s in i.ItemSubjects
+                         where s.Subject_Id == subjectId
+                         && i.Phase_Id == phaseId
+                         select i;
+            
+            var phaseTitle = db.Phases.Where(phase => phase.Phase_Id == phaseId).SingleOrDefault().Phase_Description;
+            var subjectTitle = db.Subjects.Where(subject => subject.Subject_Id == subjectId).SingleOrDefault().Subject_Description;
+            var subjectImage = db.Subjects.Where(subject => subject.Subject_Id == subjectId).SingleOrDefault().Subject_Thumbnail;
+            SearchResultModel srm = new SearchResultModel();
+            srm.Title = phaseTitle;
+            srm.Subject = subjectTitle;
+            srm.Items = items;
+            srm.PhaseLink = pageLink;
+            srm.ImageName = subjectImage;
+            return View(srm);
+        }
     }
 }
