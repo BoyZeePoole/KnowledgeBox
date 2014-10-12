@@ -195,6 +195,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper.cs" />
     <Compile Include="KnowledgwBoxEntities.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AttributesClass.cs" />
@@ -213,6 +214,7 @@
     <Compile Include="Models\ItemTarget.cs">
       <DependentUpon>KnowledgeBoxModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\KnowledgeBoxContext.cs" />
     <Compile Include="Models\KnowledgeBoxModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -382,6 +384,7 @@
     <Content Include="Scripts\jquery-loader.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
     <Content Include="Scripts\jquery.fileupload.js" />
     <Content Include="Scripts\jquery.iframe-transport.js" />
     <Content Include="Scripts\jquery.ui.widget.js" />
@@ -393,6 +396,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\KnowledgeBox.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -453,6 +457,7 @@
     <Content Include="Views\Home\Further.cshtml" />
     <Content Include="Views\Home\Phases.cshtml" />
     <Content Include="Views\Admin\SearchResult.cshtml" />
+    <Content Include="Views\Admin\MyResources.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

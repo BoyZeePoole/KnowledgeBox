@@ -14,10 +14,9 @@ namespace KnowledgeBox.Models
     
     public partial class Cart
     {
+        public int Id { get; set; }
         public System.Guid Cart_Id { get; set; }
         public System.DateTime Cart_Date { get; set; }
         public int Item_Id { get; set; }
-    
-        public virtual Item Item { get; set; }
     }
 }

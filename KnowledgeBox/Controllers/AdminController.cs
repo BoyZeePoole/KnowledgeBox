@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace KnowledgeBox.Controllers
 {
+  
     public class AdminController : Controller
     {
         //
@@ -282,5 +283,99 @@ namespace KnowledgeBox.Controllers
             srm.ImageName = subjectImage;
             return View(srm);
         }
+
+        [HttpGet]
+        public ActionResult AddToCart(int itemId, string cartId)
+        {
+            Guid guid;
+            if (string.IsNullOrEmpty(cartId))
+            {
+                guid = Helper.GetNewGuid();
+            }
+            else
+            {
+                guid = Helper.GetNewGuid(cartId);
+            }
+
+            var cartExists = db.Carts.Where(c => c.Cart_Id == guid && c.Item_Id == itemId);
+            if(cartExists==null || cartExists.Count() < 1)
+            {
+                KnowledgeBox.Models.Cart cart = new Cart();
+                cart.Cart_Id = guid;
+                cart.Item_Id = itemId;
+                cart.Cart_Date = DateTime.Today;
+                db.Carts.Add(cart);
+                db.SaveChanges();
+                return Json(new { CartGuid = guid.ToString(), warning=string.Empty }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { CartGuid = guid.ToString(), warning="Item already exists in Cart!" }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult RemoveFromCart(int itemId, string cartId)
+        {
+            Guid guid;
+            if (string.IsNullOrEmpty(cartId))
+            {
+                try
+                {
+                    guid = Helper.GetNewGuid();
+                    var cart = db.Carts.Where(c => c.Cart_Id == guid && c.Item_Id == itemId).SingleOrDefault();
+                    db.Carts.Remove(cart);
+                    db.SaveChanges();
+                    return Json(new { returnValue = "success" }, JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception ex)
+                {
+                    return Json(new { returnValue = "error", errorMessage = ex.Message }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            return Json(new { returnValue = "error", errorMessage="cartId is not defined" }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult RemoveCart(string cartId)
+        {
+            Guid guid;
+            if (!string.IsNullOrEmpty(cartId))
+            {
+                try
+                {
+                    guid = Helper.GetNewGuid(cartId);
+                    var cartItems = db.Carts.Where(c => c.Cart_Id == guid);
+                    foreach(var cartItem in cartItems)
+                    {
+                        db.Carts.Remove(cartItem);
+                    }
+                    db.SaveChanges();
+                    return Json(new { returnValue = "success" }, JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception ex)
+                {
+                    return Json(new { returnValue = "error", errorMessage=ex.Message }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+            {
+                return Json(new { returnValue = "error", errorMessage = "cartId was not defined" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public ActionResult MyResources(string cartId="")
+        {
+            if (!string.IsNullOrEmpty( cartId))
+            {
+                var guid = Helper.GetNewGuid(cartId);
+                var cartItems = db.Carts.Where(c => c.Cart_Id == guid);
+                var items = from i in db.Items
+                            from c in cartItems
+                            where i.Item_Id == c.Item_Id
+                            select i;
+                return View(items);
+            }
+            var itemsMore = new List<KnowledgeBox.Models.Item>();
+
+            return View(itemsMore);
+        }
+
     }
 }

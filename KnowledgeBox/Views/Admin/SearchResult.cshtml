@@ -18,67 +18,17 @@
                 </a>
             </div>
             @foreach (var item in Model.Items)
-            {                
+            {
                 <div style="background: rgb(242, 145, 41);height: 54px; margin-top: 12px;">
                     <img style="float:left" src="/Files/@item.ContentType.ContentType_Thumbnail" />
                     <div style="width:600px; height:100%; line-height:50px;float:left;margin-left:10px">@item.Item_Description</div>
-                    
+
                     <div style="height: 100%; line-height: 50px; float: left; margin-left: 10px">
-                        <div style="cursor:pointer" class="viewer" data-toggle="modal" data-target="#myModal" data-file="@item.Item_FilePath" data-contenttype="@item.ContentType.ContentType_Description">View</div>
+                        <div style="cursor:pointer" class="viewer" data-toggle="modal" data-target="#myModal" data-title="@item.Item_Description" data-file="@item.Item_FilePath" data-contenttype="@item.ContentType.ContentType_Description">View Resource</div>
                     </div>
-                    <div style="height: 100%; line-height: 50px; float: left; margin-left: 10px">Add to Cart</div>
+                    <div style="height: 100%; line-height: 50px; float: left; margin-left: 10px;cursor:pointer" class="cartItem" data-item-name="@item.Item_Description" data-item-id="@item.Item_Id">Add to Cart</div>
                 </div>
             }
         </div>
     </div>
 </div>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-            </div>
-            <div class="modal-body">
-                
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<script>
-    /*
-    <iframe src="http://docs.google.com/gview?url=http://path.com/to/your/pdf.pdf&embedded=true" 
-    style="width:600px; height:500px;" frameborder="0"></iframe>
-    */
-    $(document).ready(function () {
-        $(".viewer").click(function () {
-            var contentType = $(this).data("contenttype");
-            var file = $(this).data("file");
-            switch (contentType)
-            {
-                case "PDF File":
-                    OpenPdf(file);
-                    break;
-                case "Image":
-                    OpenImage(file);
-                    break;
-            }            
-        })
-    })
-    var OpenPdf = function (file) {
-        var htmlString = "<iframe src=\"http://docs.google.com/gview?url={{myPDFFile}}&embedded=true\" style=\"width:600px; height:500px;\" frameborder=\"0\"></iframe>";
-        htmlString = htmlString.replace("{{myPDFFile}}", "/Files/" + file);        
-        $(".modal-body").html(htmlString);
-    }
-    var OpenImage = function (file) {
-        var imageSource = "<img src=\"/Files/"+file+"\">"
-        $(".modal-body").html(imageSource);
-    }
-
-</script>

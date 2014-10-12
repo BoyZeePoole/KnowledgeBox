@@ -7,8 +7,9 @@
     <Schema Namespace="KnowledgeBoxModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cart">
           <Key>
-            <PropertyRef Name="Cart_Id" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Cart_Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Cart_Date" Type="datetime" Nullable="false" />
           <Property Name="Item_Id" Type="int" Nullable="false" />
@@ -82,18 +83,6 @@
           <Property Name="Target_Date" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Cart_Item1">
-          <End Role="Item" Type="Self.Item" Multiplicity="1" />
-          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Item">
-              <PropertyRef Name="Item_Id" />
-            </Principal>
-            <Dependent Role="Cart">
-              <PropertyRef Name="Item_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Item_ContentType">
           <End Role="ContentType" Type="Self.ContentType" Multiplicity="1" />
           <End Role="Item" Type="Self.Item" Multiplicity="*" />
@@ -175,10 +164,6 @@
           <EntitySet Name="Phase" EntityType="Self.Phase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Target" EntityType="Self.Target" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Cart_Item1" Association="Self.FK_Cart_Item1">
-            <End Role="Item" EntitySet="Item" />
-            <End Role="Cart" EntitySet="Cart" />
-          </AssociationSet>
           <AssociationSet Name="FK_Item_ContentType" Association="Self.FK_Item_ContentType">
             <End Role="ContentType" EntitySet="ContentType" />
             <End Role="Item" EntitySet="Item" />
@@ -241,10 +226,6 @@
             <End Role="ItemTarget" EntitySet="ItemTargets" />
           </AssociationSet>
           <EntitySet Name="Carts" EntityType="KnowledgeBoxModel.Cart" />
-          <AssociationSet Name="FK_Cart_Item1" Association="KnowledgeBoxModel.FK_Cart_Item1">
-            <End Role="Item" EntitySet="Items" />
-            <End Role="Cart" EntitySet="Carts" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ContentType">
           <Key>
@@ -275,7 +256,6 @@
           <NavigationProperty Name="ItemSubjects" Relationship="KnowledgeBoxModel.FK_ItemSubject_Item" FromRole="Item" ToRole="ItemSubject" />
           <NavigationProperty Name="ItemTargets" Relationship="KnowledgeBoxModel.FK_ItemTarget_Item" FromRole="Item" ToRole="ItemTarget" />
           <Property Name="Item_SystemFileName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Carts" Relationship="KnowledgeBoxModel.FK_Cart_Item1" FromRole="Item" ToRole="Cart" />
         </EntityType>
         <EntityType Name="ItemSubject">
           <Key>
@@ -402,25 +382,13 @@
         </Association>
         <EntityType Name="Cart">
           <Key>
-            <PropertyRef Name="Cart_Id" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Cart_Id" Type="Guid" Nullable="false" />
           <Property Name="Cart_Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Item_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Item" Relationship="KnowledgeBoxModel.FK_Cart_Item1" FromRole="Cart" ToRole="Item" />
         </EntityType>
-        <Association Name="FK_Cart_Item1">
-          <End Type="KnowledgeBoxModel.Item" Role="Item" Multiplicity="1" />
-          <End Type="KnowledgeBoxModel.Cart" Role="Cart" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Item">
-              <PropertyRef Name="Item_Id" />
-            </Principal>
-            <Dependent Role="Cart">
-              <PropertyRef Name="Item_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -509,6 +477,7 @@
                 <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
                 <ScalarProperty Name="Cart_Date" ColumnName="Cart_Date" />
                 <ScalarProperty Name="Cart_Id" ColumnName="Cart_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
