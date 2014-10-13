@@ -41,6 +41,7 @@ $(document).ready(function () {
     }
   });
 
+  // Add Item
   $(".cartItem").click(function () {
     var itemId = $(this).data("itemId");
     var itemName = $(this).data("itemName");
@@ -56,6 +57,42 @@ $(document).ready(function () {
           }
           AddCookieToMenu();
         });
+  });
+  // Remove Item
+  $(".cartItemRemove").click(function () {
+    var itemId = $(this).data("itemId");
+    var itemName = $(this).data("itemName");
+    var item = $(this);
+    bootbox.dialog({
+      message: "Are you sure you want to delete " + itemName + "?",
+      title: "Delete " + itemName,
+      buttons: {
+        success: {
+          label: "Delete!",
+          className: "btn-success",
+          callback: function () {
+            $.getJSON("/Admin/RemoveFromCart", { itemId: itemId, cartId: GlobalCartId },
+                function (data) {
+                  if (data.errorMessage != "") {
+                    $.jGrowl(data.errorMessage, { position: 'bottom-right' });
+                  }
+                  else {
+                    $.jGrowl(itemName + " Removed!", { position: 'bottom-right' });
+                    var parent = item.parent();
+                    parent.fadeOut(500, function () { $(this).remove(); });
+                  }
+                });
+          }
+        },
+        cancel: {
+          label: "Cancel",
+          className: "btn-danger",
+          callback: function () {
+            
+          }
+        }
+      }
+    });
   });
 });
 
@@ -97,3 +134,25 @@ var OpenImage = function (file, title) {
   $(".modal-body").html(imageSource);
 }
 
+var DeleteDialog = function (title, message) {
+  bootbox.dialog({
+    message: message,
+    title: title,
+    buttons: {
+      success: {
+        label: "Delete!",
+        className: "btn-success",
+        callback: function () {
+          return true;
+        }
+      },
+      cancel: {
+        label: "Cancel",
+        className: "btn-danger",
+        callback: function () {
+          return false;
+        }
+      }
+    }
+  });
+}

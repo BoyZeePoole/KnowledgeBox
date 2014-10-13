@@ -315,15 +315,15 @@ namespace KnowledgeBox.Controllers
         public ActionResult RemoveFromCart(int itemId, string cartId)
         {
             Guid guid;
-            if (string.IsNullOrEmpty(cartId))
+            if (!string.IsNullOrEmpty(cartId))
             {
                 try
                 {
-                    guid = Helper.GetNewGuid();
+                    guid = Helper.GetNewGuid(cartId);
                     var cart = db.Carts.Where(c => c.Cart_Id == guid && c.Item_Id == itemId).SingleOrDefault();
                     db.Carts.Remove(cart);
                     db.SaveChanges();
-                    return Json(new { returnValue = "success" }, JsonRequestBehavior.AllowGet);
+                    return Json(new { returnValue = "success", errorMessage = "" }, JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception ex)
                 {
