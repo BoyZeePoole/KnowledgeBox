@@ -1,4 +1,5 @@
-﻿using KnowledgeBox.Models;
+﻿using KnowledgeBox.Custom;
+using KnowledgeBox.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,7 +17,7 @@ namespace KnowledgeBox.Controllers
         private KnowledgeBoxEntities db = new KnowledgeBoxEntities();
         public ActionResult Index()
         {
-            var items = db;
+            var items = db.Items;
             return View(items);
         }
 
@@ -67,6 +68,7 @@ namespace KnowledgeBox.Controllers
                     item.Item_Id = id;
                     db.Entry(item).State = System.Data.EntityState.Modified;
                 }
+                LuceneSearch.AddUpdateLuceneIndex(item);
                 db.SaveChanges();
                 int itemId = item.Item_Id;
 
@@ -284,6 +286,21 @@ namespace KnowledgeBox.Controllers
             return View(srm);
         }
 
+        [HttpPost]
+        public ActionResult SearchItems(string searchPhrase)
+        {
+            //var items = db.Items.ToList();
+            //if(string.IsNullOrEmpty(searchPhrase))
+
+            // items = db.Items.ToList();
+            //else
+            //    items = db.Items.Where(i => i.Item_Name == searchPhrase).ToList();
+
+            var items = LuceneSearch.Search(searchPhrase);
+            return View("index", items);            
+        }
+
+
         [HttpGet]
         public ActionResult AddToCart(int itemId, string cartId)
         {
@@ -330,7 +347,7 @@ namespace KnowledgeBox.Controllers
                     return Json(new { returnValue = "error", errorMessage = ex.Message }, JsonRequestBehavior.AllowGet);
                 }
             }
-            return Json(new { returnValue = "error", errorMessage="cartId is not defined" }, JsonRequestBehavior.AllowGet);
+            return Json(new { returnValue = "error", errorMessage="cartId "+ cartId+" is not defined..." }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -377,5 +394,16 @@ namespace KnowledgeBox.Controllers
             return View(itemsMore);
         }
 
+        public ActionResult Lucene()
+        {
+            return View("Lucene");
+        }
+        [HttpPost]
+        public ActionResult BuildLucene()
+        {
+            LuceneSearch.AddDataToLuceneIndex();
+            ViewBag.Result = "Lucene Index Created...";
+            return View("Lucene");
+        }
     }
 }

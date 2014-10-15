@@ -1,4 +1,5 @@
-﻿@model KnowledgeBox.Models.KnowledgeBoxEntities
+﻿@model IEnumerable<KnowledgeBox.Models.Item>
+
 
 @{
   ViewBag.Title = "Search";
@@ -21,7 +22,7 @@
             </th>
           </tr>
         </thead>
-        @foreach (var item in Model.Items.OrderByDescending(itm=>itm.Item_Date))
+        @foreach (var item in Model.OrderByDescending(itm=>itm.Item_Date))
         {
           <tr>
             <td>@item.Item_Name</td>

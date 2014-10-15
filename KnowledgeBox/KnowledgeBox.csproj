@@ -39,8 +39,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="Ionic.Zip">
       <HintPath>..\packages\DotNetZip.1.9.3\lib\net20\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net">
+      <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -189,6 +195,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Custom\LuceneSearch.cs" />
     <Compile Include="Custom\ZipResult.cs" />
     <Compile Include="DBContext.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -459,6 +466,7 @@
     <Content Include="Views\Home\Phases.cshtml" />
     <Content Include="Views\Admin\SearchResult.cshtml" />
     <Content Include="Views\Admin\MyResources.cshtml" />
+    <Content Include="Views\Admin\Lucene.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
