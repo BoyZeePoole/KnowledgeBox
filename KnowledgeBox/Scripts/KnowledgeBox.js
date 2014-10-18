@@ -98,7 +98,7 @@ $(document).ready(function () {
   $(".criteria").click(function () {    
     $("#SearchCriteria").html($(this).text() + "<span class=\"caret\"></span>");
     var searchCriteria = $(this).text();
-    var searchString = 
+    var searchString = "";
 
   })
 });

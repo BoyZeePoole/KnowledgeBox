@@ -16,7 +16,7 @@ namespace KnowledgeBox.Custom
         {
             get
             {
-                return _fileName ?? "file.zip";
+                return _fileName ?? "KnowledgeBoxDownload.zip";
             }
             set { _fileName = value; }
         }

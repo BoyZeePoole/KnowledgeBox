@@ -350,22 +350,20 @@ namespace KnowledgeBox.Controllers
             return Json(new { returnValue = "error", errorMessage="cartId "+ cartId+" is not defined..." }, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult RemoveCart(string cartId)
         {
-            Guid guid;
+            Guid guid; 
             if (!string.IsNullOrEmpty(cartId))
             {
                 try
                 {
-                    guid = Helper.GetNewGuid(cartId);
-                    var cartItems = db.Carts.Where(c => c.Cart_Id == guid);
-                    foreach(var cartItem in cartItems)
-                    {
-                        db.Carts.Remove(cartItem);
-                    }
-                    db.SaveChanges();
-                    return Json(new { returnValue = "success" }, JsonRequestBehavior.AllowGet);
+                    guid = Helper.GetNewGuid(cartId);                    
+                    var items = HelperClass.GetItemsFromCart(guid);
+                    HelperClass.RemoveCart(guid);
+                    string basePath = Server.MapPath("~/Files");
+                    var zipFilesPath = items.Select(a => Path.Combine(basePath, a.Item_FilePath));
+                    return new ZipResult(zipFilesPath);
                 }
                 catch (Exception ex)
                 {
@@ -379,10 +377,11 @@ namespace KnowledgeBox.Controllers
         }
         public ActionResult MyResources(string cartId="")
         {
-            if (!string.IsNullOrEmpty( cartId))
+            if (!string.IsNullOrEmpty(cartId))
             {
                 var guid = Helper.GetNewGuid(cartId);
                 var cartItems = db.Carts.Where(c => c.Cart_Id == guid);
+                ViewBag.CartId = cartId;
                 var items = from i in db.Items
                             from c in cartItems
                             where i.Item_Id == c.Item_Id
