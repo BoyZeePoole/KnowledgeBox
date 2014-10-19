@@ -1,31 +1,23 @@
 ﻿var GlobalCartId = "";
-
+var totalItems = 0;
 $(document).ready(function () {
   CookieChecker();
   GlobalCartId = $.cookie("CartGuidValue");
-  var totalItems = 0;
+
 
   // Adds the cartItem to cookie...And sets the Menu item for Cart
   AddCookieToMenu();
+  AdjustCartItems();
 
   // When we download the files, remove cookie, call server controller to remove db cart items, and Zip file.
-  $(".download").click(function () {
-    $.getJSON("/Admin/RemoveCart", { cartId: GlobalCartId },
-        function (data) {
-          if (data.returnValue == "error") {
-            $.jGrowl("An error has occured!\n" + data.errorMessage);
-          }
-          else {
-            $.removeCookie("CartGuidValue", { expires: 7, path: '/' });
-            $('.item').remove();
-
-            $.jGrowl("Cart has been emptied...");
-            RemoveCookieFromMenu();
-          }
-        });
-
-
+  $("#Download").click(function () {
+    $.removeCookie("CartGuidValue", { expires: 7, path: '/' });
+    $('.item').slideUp(500, function () { $(this).remove(); });
+    $.jGrowl("Cart has been emptied...");
+    RemoveCookieFromMenu();
+    AdjustCartItems(0);
   })
+
 
   $(".viewer").click(function () {
     var contentType = $(this).data("contenttype");
@@ -50,8 +42,10 @@ $(document).ready(function () {
           GlobalCartId = data.CartGuid;
           if (data.warning != "")
             $.jGrowl(data.warning, { position: 'bottom-right' });
-          else
+          else {
             $.jGrowl(itemName + " Added!", { position: 'bottom-right' });
+            AdjustCartItems(1);
+          }
           if ($.cookie("CartGuidValue") == "") {
             $.cookie("CartGuidValue", data.CartGuid, { expires: 7, path: '/' });
           }
@@ -79,7 +73,8 @@ $(document).ready(function () {
                   else {
                     $.jGrowl(itemName + " Removed!", { position: 'bottom-right' });
                     var parent = item.parent();
-                    parent.fadeOut(500, function () { $(this).remove(); });
+                    parent.slideUp(500, function () { $(this).remove(); });
+                    AdjustCartItems(-1);
                   }
                 });
           }
@@ -88,24 +83,35 @@ $(document).ready(function () {
           label: "Cancel",
           className: "btn-danger",
           callback: function () {
-            
+
           }
         }
       }
     });
   });
 
-  $(".criteria").click(function () {    
+  $(".criteria").click(function () {
     $("#SearchCriteria").html($(this).text() + "<span class=\"caret\"></span>");
     var searchCriteria = $(this).text();
     var searchString = "";
-
   })
+
+  // setting to position of the number within the troley...
+  var offset = $("#cartImage").offset();
+  $("#cartItemNumber").offset({ top: offset.top, left: offset.left });
+  $("#cartItemNumber").css("width", $("#cartImage").css("width"));
+  $("#cartItemNumber").css("height", $("#cartImage").css("height"));
+
+  // cartImage
+
 });
 
 var CookieChecker = function () {
   if ($.cookie("CartGuidValue") == undefined || $.cookie("CartGuidValue") == null || $.cookie("CartGuidValue") == "") {
     $.cookie("CartGuidValue", "", { expires: 7, path: '/' });
+  }
+  if ($.cookie("CartQty") == undefined || $.cookie("CartQty") == null || $.cookie("CartQty") == "") {
+    $.cookie("CartQty", 0, { path: '/' });
   }
 }
 var AddCookieToMenu = function () {
@@ -122,9 +128,26 @@ var RemoveCookieFromMenu = function () {
   if ($(".myResourcesLink").attr("href").indexOf("cartId") == -1) {
     var newURL = $(".myResourcesLink").attr("href").split('?')[0];
     $(".myResourcesLink").attr("href", newURL);
+    
   }
 }
 
+var AdjustCartItems = function (number) {
+  var cartQty = parseInt($.cookie("CartQty"));
+  if (isNaN(cartQty)) cartQty = 0;
+  if (number == 0) {
+    $.cookie("CartQty", 0, { path: '/' });
+    cartQty = 0;
+  }
+  else {
+    if (number != 'undefined' && number != undefined)
+    {
+      cartQty += number;
+    }    
+    $.cookie("CartQty", cartQty, { path: '/' });
+  }
+  $("#cartItemNumber").html(cartQty);
+}
 
 var OpenPdf = function (file, title) {
   //var htmlString = "<iframe src=\"http://docs.google.com/gview?url={{myPDFFile}}&embedded=true\" style=\"width:600px; height:500px;\" frameborder=\"0\"></iframe>";

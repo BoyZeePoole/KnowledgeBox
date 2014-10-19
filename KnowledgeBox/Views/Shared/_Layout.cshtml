@@ -38,7 +38,7 @@
                             <li style="line-height:30px"><a style="font-size:13px;color:#000" href="#">Teachers cool Tools</a></li>
                         </ul>
                     </li>
-                    <li>@Html.ActionLink("My Resources", "MyResources", "Admin", null, new { @class = "myResourcesLink" })><img style="position:relative" src="~/Images/Cart.png" /></li>
+                    <li>@Html.ActionLink("My Resources", "MyResources", "Admin", null, new { @class = "myResourcesLink" })><img style="position:relative" id="cartImage" src="~/Images/Cart.png" /></li>
                 </ul>
             </div>
             <div style="background: rgb(102, 102, 102); height: 160px;">
@@ -104,5 +104,6 @@
         </div>
     </div>
     @RenderSection("scripts", required: false)
+    <div id="cartItemNumber" style="position: absolute; color: #FFF; opacity: 0.8; filter: alpha(opacity=80); text-align: center; font-size: 30px; "></div>
 </body>
 </html>
