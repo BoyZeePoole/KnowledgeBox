@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace KnowledgeBox.Controllers
 {
@@ -15,10 +16,13 @@ namespace KnowledgeBox.Controllers
         //
         // GET: /Admin/
         private KnowledgeBoxEntities db = new KnowledgeBoxEntities();
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var items = db.Items;
-            return View(items);
+            var items = db.Items.OrderByDescending(x=>x.CreatedBy);
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(items.ToPagedList(pageNumber, pageSize));
+            //return View(items);
         }
 
         public ActionResult Edit(int id = 0)
@@ -122,10 +126,12 @@ namespace KnowledgeBox.Controllers
         /// Subject Actions
         /// </summary>
         /// <returns></returns>
-        public ActionResult Subject()
+        public ActionResult Subject(int? page)
         {
-            var subjects = db.Subjects; 
-            return View("Subject", subjects);
+            var subjects = db.Subjects.OrderByDescending(x => x.CreatedBy);
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+            return View("Subject", subjects.ToPagedList(pageNumber, pageSize));
         }
         public ActionResult EditSubject(int id = 0)
         {
@@ -265,39 +271,38 @@ namespace KnowledgeBox.Controllers
             return View("EditContentType", contentType);            
         }
 
-        public ActionResult SearchResult(int phaseId, int subjectId, string pageLink)
+        public ActionResult SearchResult(int phaseId, int subjectId, string pageLink, int? page)
         {
-            //var items = new List<Item>();
-            var items = from i in db.Items
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            var items = (from i in db.Items
                          from s in i.ItemSubjects
                          where s.Subject_Id == subjectId
                          && i.Phase_Id == phaseId
-                         select i;
+                         select i).OrderByDescending(x=>x.CreatedBy).ToPagedList(pageNumber, pageSize);
             
             var phaseTitle = db.Phases.Where(phase => phase.Phase_Id == phaseId).SingleOrDefault().Phase_Description;
             var subjectTitle = db.Subjects.Where(subject => subject.Subject_Id == subjectId).SingleOrDefault().Subject_Description;
             var subjectImage = db.Subjects.Where(subject => subject.Subject_Id == subjectId).SingleOrDefault().Subject_Thumbnail;
-            SearchResultModel srm = new SearchResultModel();
-            srm.Title = phaseTitle;
-            srm.Subject = subjectTitle;
-            srm.Items = items;
-            srm.PhaseLink = pageLink;
-            srm.ImageName = subjectImage;
-            return View(srm);
+
+            ViewBag.PhaseTitle = phaseTitle;
+            ViewBag.SubjectTitle = subjectTitle;
+            ViewBag.SubjectImage = subjectImage;
+            ViewBag.PhaseLink = pageLink;
+            return View(items);
         }
 
         [HttpPost]
-        public ActionResult SearchItems(string searchPhrase)
+        public ActionResult SearchItems(string searchPhrase, int? page, string viewName="")
         {
-            //var items = db.Items.ToList();
-            //if(string.IsNullOrEmpty(searchPhrase))
-
-            // items = db.Items.ToList();
-            //else
-            //    items = db.Items.Where(i => i.Item_Name == searchPhrase).ToList();
-
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
             var items = LuceneSearch.Search(searchPhrase);
-            return View("index", items);            
+            if (string.IsNullOrEmpty(viewName))
+                return View("index", items.ToPagedList(pageNumber, pageSize));
+            else
+                return View(viewName, items.ToPagedList(pageNumber, pageSize));
         }
 
 
@@ -375,22 +380,24 @@ namespace KnowledgeBox.Controllers
                 return Json(new { returnValue = "error", errorMessage = "cartId was not defined" }, JsonRequestBehavior.AllowGet);
             }
         }
-        public ActionResult MyResources(string cartId="")
+        public ActionResult MyResources(int? page,string cartId = "")
         {
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
             if (!string.IsNullOrEmpty(cartId))
             {
                 var guid = Helper.GetNewGuid(cartId);
                 var cartItems = db.Carts.Where(c => c.Cart_Id == guid);
                 ViewBag.CartId = cartId;
-                var items = from i in db.Items
+                var items = (from i in db.Items
                             from c in cartItems
                             where i.Item_Id == c.Item_Id
-                            select i;
-                return View(items);
+                            select i).OrderByDescending(x=>x.CreatedBy);
+                return View(items.ToPagedList(pageNumber, pageSize));
             }
             var itemsMore = new List<KnowledgeBox.Models.Item>();
 
-            return View(itemsMore);
+            return View(itemsMore.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult Lucene()

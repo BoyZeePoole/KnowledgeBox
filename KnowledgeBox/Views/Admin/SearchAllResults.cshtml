@@ -17,17 +17,6 @@
 <div class="container" style="height: 712px; width: 980px;padding-top:20px;padding-right: 0px;padding-left: 0px;margin-right: auto;margin-left: auto">
     <div class="row" style="margin:0">
         <div class="col-md-12" style="z-index:100">
-            <div style="text-align: center; font-family: Liberation;color:#FFF;font-size:30px">
-                @ViewBag.PhaseTitle  @ViewBag.SubjectTitle
-                <img src="/Files/@ViewBag.SubjectImage" />
-            </div>
-            <div style="">
-                <a href="@ViewBag.PhaseLink" class="orangeLink">
-                    <div class="orangeButton orangeButtonSmall" style="padding-top:8px;width:250px">
-                        <span>< Back to @ViewBag.PhaseTitle</span>
-                    </div>
-                </a>
-            </div>
             @foreach (var item in Model)
             {
                 <div style="background: rgb(242, 145, 41);height: 54px; margin-top: 12px;">
@@ -37,7 +26,7 @@
                     <div style="height: 100%; line-height: 50px; float: left; margin-left: 10px">
                         <div style="cursor:pointer" class="viewer" data-toggle="modal" data-target="#myModal" data-title="@item.Item_Description" data-file="@item.Item_FilePath" data-contenttype="@item.ContentType.ContentType_Description">View</div>
                     </div>
-                    <div style="height: 100%; line-height: 50px; float: left; margin-left: 10px;cursor:pointer" class="cartItem" data-item-name="@item.Item_Description" data-item-id="@item.Item_Id">Add to Cart</div>
+                    <div style="height: 100%; line-height: 50px; float: left; margin-left: 20px;cursor:pointer" class="cartItem" data-item-name="@item.Item_Description" data-item-id="@item.Item_Id">Add to Cart</div>
                 </div>
             }
             <div>

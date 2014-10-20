@@ -9,19 +9,24 @@
                 Search for resources
                 <img src="~/Images/Search.jpg" />
             </div>
-            <div style="font-family: Liberation;color:#FFF;">
-                <span style="font-size:26px;">What to do:</span>
-                <ul style="font-size: 18px">
-                    <li>Type key words in the box below, e.g. chemistry or insect</li>
-                    <li>Type up to 5 words</li>
-                    <li>Use a comma to separate your words</li>
-                    <li>Click 'search' button</li>
-                </ul>
-                <input type="text" class="form-control" name="txtSearch" id="txtSearch" />
-            </div>
-            <div style="text-align: center; font-family: Liberation;color:#FFF;font-size:30px;margin-top:12px">
-                <button type="button" class="btn btn-default btn-lg active">Search</button>
-            </div>
+            @using (Html.BeginForm("SearchItems", "Admin", new { @page = 1, viewName = "SearchAllResults" }, FormMethod.Post, new { @class = "form-horizontal", role = "form"}))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div style="font-family: Liberation;color:#FFF;">
+                    <span style="font-size:26px;">What to do:</span>
+                    <ul style="font-size: 18px">
+                        <li>Type key words in the box below, e.g. chemistry or insect</li>
+                        <li>Type up to 5 words</li>
+                        <li>Use a comma to separate your words</li>
+                        <li>Click 'search' button</li>
+                    </ul>
+                    <input type="text" class="form-control" name="searchPhrase" id="searchPhrase" />
+                </div>
+                <div style="text-align: center; font-family: Liberation;color:#FFF;font-size:30px;margin-top:12px">
+                    <button type="submit" class="btn btn-default btn-lg active">Search</button>
+                </div>
+            }
         </div>
     </div>
 </div>

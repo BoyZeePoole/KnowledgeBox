@@ -1,5 +1,5 @@
-﻿@model IEnumerable<KnowledgeBox.Models.Subject>
-
+﻿@model PagedList.IPagedList<KnowledgeBox.Models.Subject>
+@using PagedList.Mvc;
 <div class="container" style="height: 712px; width: 1200px; padding-right: 0px; padding-left: 0px; margin-right: auto; margin-left: auto">
     @Html.Partial("_AdminMenu")
     <div class="row" style="margin: 0; background: #FFF; padding: 20px">
@@ -41,7 +41,8 @@
                 }
             </table>
             <div>
-                @Html.ActionLink("Back to List", "Index")
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                @Html.PagedListPager(Model, page => Url.Action("Subject", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
             </div>
         </div>
     </div>

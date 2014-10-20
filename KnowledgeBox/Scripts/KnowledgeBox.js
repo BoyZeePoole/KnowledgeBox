@@ -30,6 +30,9 @@ $(document).ready(function () {
       case "Image":
         OpenImage(file, title);
         break;
+      case "Adobe Flash":
+        OpenFlv(file, title);
+        break;
     }
   });
 
@@ -58,8 +61,8 @@ $(document).ready(function () {
     var itemName = $(this).data("itemName");
     var item = $(this);
     bootbox.dialog({
-      message: "Are you sure you want to delete " + itemName + "?",
-      title: "Delete " + itemName,
+      message: "Are you sure you want to delete <b>" + itemName + "?</b>",
+      title: "Delete <b>" + itemName + "</b>",
       buttons: {
         success: {
           label: "Delete!",
@@ -163,6 +166,14 @@ var OpenImage = function (file, title) {
   var imageSource = "<img src=\"/Files/" + file + "\">"
   $(".modal-body").html(imageSource);
 }
+var OpenFlv = function (file, title) {
+  $("#myModalLabel").text(title);
+  var file = "/Files/" + file;
+  var flvCode = "<object classid=\"clsid:d27cdb6e-ae6d-11cf-96b8-444553540000\" codebase=\"http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0\" width=\"640\" height=\"480\" id=\"VideoPlayer\" align=\"middle\"> <param name=\"allowScriptAccess\" value=\"*\" /> <param name=\"allowFullScreen\" value=\"true\" /> <param name=\"movie\" value=\"/Scripts/FLVPlayer.swf?video=" + file + "\" /> <param name\"quality\" value=\"high\" /><param name=\"bgcolor\" value=\"#ffffff\" /> <embed src=\"/Scripts/FLVPlayer.swf?video="+file+"&autoplay=true\" quality=\"high\" bgcolor=\"#000000\" width=\"640\" height=\"480\" name=\"VideoPlayer\" align=\"middle\" allowScriptAccess=\"*\" allowFullScreen=\"true\" type=\"application/x-shockwave-flash\" pluginspage=\"http://www.macromedia.com/go/getflashplayer\" /> </object>";
+  var videoSource = "";
+  $(".modal-body").html(flvCode);
+}
+
 
 var DeleteDialog = function (title, message) {
   bootbox.dialog({
