@@ -1,6 +1,7 @@
 ﻿using KnowledgeBox.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -26,6 +27,16 @@ namespace KnowledgeBox.Custom
                         && i.Item_Id == c.Item_Id 
                         select i).ToList();
 
+        }
+        public static string GetPhaseDescription(int id)
+        {
+            if( id==0) return string.Empty;
+            var phaseItem = db.Phases.Find(id).Phase_Description;
+            return phaseItem;
+        }
+        public static void CreateFolder(string folderPath)
+        {
+            Directory.CreateDirectory(folderPath);
         }
     }
 }

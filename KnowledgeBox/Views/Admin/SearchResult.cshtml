@@ -35,7 +35,7 @@
                     <div style="width:600px; height:100%; line-height:50px;float:left;margin-left:10px">@item.Item_Description</div>
 
                     <div style="height: 100%; line-height: 50px; float: left; margin-left: 10px">
-                        <div style="cursor:pointer" class="viewer" data-toggle="modal" data-target="#myModal" data-title="@item.Item_Description" data-file="@item.Item_FilePath" data-contenttype="@item.ContentType.ContentType_Description">View</div>
+                        <div style="cursor:pointer" class="viewer" data-toggle="modal" data-target="#myModal" data-title="@item.Item_Description" data-file="@item.Phase.Phase_Description/@item.Item_FilePath" data-contenttype="@item.ContentType.ContentType_Description">View</div>
                     </div>
                     <div style="height: 100%; line-height: 50px; float: left; margin-left: 10px;cursor:pointer" class="cartItem" data-item-name="@item.Item_Description" data-item-id="@item.Item_Id">Add to Cart</div>
                 </div>
@@ -43,7 +43,7 @@
             <div>
                 @if (@Model.PageCount > 1)
                 {
-                    @Html.PagedListPager(Model, page => Url.Action("MyResources", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, cartId = ViewBag.CartId }))
+                    @Html.PagedListPager(Model, page => Url.Action("SearchResult", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, cartId = ViewBag.CartId, phaseId = ViewBag.PhaseId, subjectId = ViewBag.SubjectId, pageLink = ViewBag.PageLink }))
                 }
             </div>
         </div>

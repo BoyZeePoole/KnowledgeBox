@@ -131,8 +131,7 @@ namespace KnowledgeBox.Custom
         {
             return hits.Select(_mapLuceneDocumentToData).ToList();
         }
-        private static IEnumerable<KnowledgeBox.Models.Item> _mapLuceneToDataList(IEnumerable<ScoreDoc> hits,
-            IndexSearcher searcher)
+        private static IEnumerable<KnowledgeBox.Models.Item> _mapLuceneToDataList(IEnumerable<ScoreDoc> hits, IndexSearcher searcher)
         {
             return hits.Select(hit => _mapLuceneDocumentToData(searcher.Doc(hit.Doc))).ToList();
         }

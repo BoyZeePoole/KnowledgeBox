@@ -14,7 +14,7 @@ using KnowledgeBox.Models;
 namespace KnowledgeBox.Controllers
 {
     [Authorize]
-    [InitializeSimpleMembership]
+    
     public class AccountController : Controller
     {
         //

@@ -16,6 +16,8 @@ namespace KnowledgeBox.Controllers
         //
         // GET: /Admin/
         private KnowledgeBoxEntities db = new KnowledgeBoxEntities();
+
+        [Authorize(Roles="admin")]
         public ActionResult Index(int? page)
         {
             var items = db.Items.OrderByDescending(x=>x.CreatedBy);
@@ -273,7 +275,7 @@ namespace KnowledgeBox.Controllers
 
         public ActionResult SearchResult(int phaseId, int subjectId, string pageLink, int? page)
         {
-            int pageSize = 10;
+            int pageSize = 5;
             int pageNumber = (page ?? 1);
 
             var items = (from i in db.Items
@@ -290,13 +292,18 @@ namespace KnowledgeBox.Controllers
             ViewBag.SubjectTitle = subjectTitle;
             ViewBag.SubjectImage = subjectImage;
             ViewBag.PhaseLink = pageLink;
+            // Paging vars
+            ViewBag.PhaseId = phaseId;
+            ViewBag.SubjectId = subjectId;
+            ViewBag.PageLink = pageLink;
+
             return View(items);
         }
 
         [HttpPost]
         public ActionResult SearchItems(string searchPhrase, int? page, string viewName="")
         {
-            int pageSize = 10;
+            int pageSize = 6;
             int pageNumber = (page ?? 1);
             var items = LuceneSearch.Search(searchPhrase);
             if (string.IsNullOrEmpty(viewName))
