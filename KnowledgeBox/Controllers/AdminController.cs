@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using WebMatrix.WebData;
+using System.Data.SqlClient;
 
 namespace KnowledgeBox.Controllers
 {
@@ -62,8 +64,13 @@ namespace KnowledgeBox.Controllers
         {
             if (ModelState.IsValid)
             {
-                item.CreatedBy = 1; // Still need to tie this to a real user...
+                //item.CreatedBy = 1; // Still need to tie this to a real user...
+                item.CreatedBy = WebSecurity.GetUserId(User.Identity.Name);
                 item.Item_Date = DateTime.Today;
+                var phaseDesc = HelperClass.GetPhaseDescription(item.Phase_Id);
+
+                item.Item_FilePath = phaseDesc + "/" + item.Item_FilePath;
+
                 if (id == 0)
                 {
                     db.Entry(item).State = System.Data.EntityState.Added;
@@ -418,5 +425,16 @@ namespace KnowledgeBox.Controllers
             ViewBag.Result = "Lucene Index Created...";
             return View("Lucene");
         }
+        public ActionResult SQL()
+        {
+            return View("SQL");
+        }
+        public ActionResult BuildSQL()
+        {
+
+
+            return View("SQL");
+        }
+
     }
 }

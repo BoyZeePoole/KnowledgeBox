@@ -30,8 +30,26 @@ $(document).ready(function () {
       case "Image":
         OpenImage(file, title);
         break;
-      case "Adobe Flash":
+      case "Adobe Flash Video":
         OpenFlv(file, title);
+        break;
+      case "Flash swf":
+        OpenFlash(file, title);
+        break;
+      case "Video":
+        OpenVideo(file, title);
+        break;        
+      case "Application":
+        OpenApp(file, title);
+        break;
+      case "Java":
+        OpenJava(file, title);
+        break;
+      case "Zip File":
+        OpenZip(file, title);
+        break;
+      case "Powerpoint":
+        OpenPowerpoint(file, title);
         break;
     }
   });
@@ -169,11 +187,43 @@ var OpenImage = function (file, title) {
 var OpenFlv = function (file, title) {
   $("#myModalLabel").text(title);
   var file = "/Files/" + file;
-  var flvCode = "<object classid=\"clsid:d27cdb6e-ae6d-11cf-96b8-444553540000\" codebase=\"http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0\" width=\"640\" height=\"480\" id=\"VideoPlayer\" align=\"middle\"> <param name=\"allowScriptAccess\" value=\"*\" /> <param name=\"allowFullScreen\" value=\"true\" /> <param name=\"movie\" value=\"/Scripts/FLVPlayer.swf?video=" + file + "\" /> <param name\"quality\" value=\"high\" /><param name=\"bgcolor\" value=\"#ffffff\" /> <embed src=\"/Scripts/FLVPlayer.swf?video="+file+"&autoplay=true\" quality=\"high\" bgcolor=\"#000000\" width=\"640\" height=\"480\" name=\"VideoPlayer\" align=\"middle\" allowScriptAccess=\"*\" allowFullScreen=\"true\" type=\"application/x-shockwave-flash\" pluginspage=\"http://www.macromedia.com/go/getflashplayer\" /> </object>";
-  var videoSource = "";
+  var flvCode = "<object classid=\"clsid:d27cdb6e-ae6d-11cf-96b8-444553540000\" codebase=\"http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0\" width=\"640\" height=\"480\" id=\"VideoPlayer\" align=\"middle\"> <param name=\"allowScriptAccess\" value=\"*\" /> <param name=\"allowFullScreen\" value=\"true\" /> <param name=\"movie\" value=\"/Scripts/FLVPlayer.swf?video=" + file + "\" /> <param name\"quality\" value=\"high\" /><param name=\"bgcolor\" value=\"#ffffff\" /> <embed src=\"/Scripts/FLVPlayer.swf?video="+file+"&autoplay=true\" quality=\"high\" bgcolor=\"#000000\" width=\"640\" height=\"480\" name=\"VideoPlayer\" align=\"middle\" allowScriptAccess=\"*\" allowFullScreen=\"true\" type=\"application/x-shockwave-flash\" pluginspage=\"http://www.macromedia.com/go/getflashplayer\" /> </object>";  
   $(".modal-body").html(flvCode);
 }
 
+var OpenVideo = function (file, title) {
+  $("#myModalLabel").text(title);
+  var file = "/Files/" + file;
+  var vidCode = "<video width=\"640\" height=\"480\" controls><source src=\""+file+"\" type=\"video/mp4\">Your browser does not support the video tag.</video>";
+  $(".modal-body").html(vidCode);
+}
+
+var OpenFlash = function (file, title) {
+  $("#myModalLabel").text(title);
+  var file = "/Files/" + file;
+  var vidCode = "<object width=\"640\" height=\"480\">\n    <param name=\"movie\" value=\"" + file + "\">\n    <embed src=\"" + file+"\" width=\"640\" height=\"480\">\n    </embed>\n</object>";
+  $(".modal-body").html(vidCode);
+}
+var OpenJava = function (file, title) {
+  $("#myModalLabel").text(title);
+  var vidCode = "Cannot view a java .jar file!";
+  $(".modal-body").html(vidCode);
+}
+var OpenApp = function (file, title) {
+  $("#myModalLabel").text(title);
+  var vidCode = "Cannot view a aplication .exe file!";
+  $(".modal-body").html(vidCode);
+}
+var OpenZip = function (file, title) {
+  $("#myModalLabel").text(title);
+  var vidCode = "Cannot view a Zip .zip file!";
+  $(".modal-body").html(vidCode);
+}
+OpenPowerpoint = function (file, title) {
+  $("#myModalLabel").text(title);
+  var vidCode = "Cannot view a Powerpoint presentaion .ppt file!";
+  $(".modal-body").html(vidCode);
+}
 
 var DeleteDialog = function (title, message) {
   bootbox.dialog({
