@@ -5,11 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="KnowledgeBoxModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Knowledgebox.dbo.Cart' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Cart">
           <Key>
             <PropertyRef Name="Id" />
+            
+            
+            
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Cart_Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Cart_Date" Type="datetime" Nullable="false" />
           <Property Name="Item_Id" Type="int" Nullable="false" />
@@ -18,7 +23,7 @@
           <Key>
             <PropertyRef Name="ContentType_Id" />
           </Key>
-          <Property Name="ContentType_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContentType_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ContentType_Date" Type="datetime" Nullable="false" />
           <Property Name="ContentType_Description" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="ContentType_Thumbnail" Type="varchar" MaxLength="50" />
@@ -28,7 +33,7 @@
           <Key>
             <PropertyRef Name="Item_Id" />
           </Key>
-          <Property Name="Item_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Item_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Item_Date" Type="datetime" Nullable="false" />
           <Property Name="Item_Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Item_Description" Type="varchar(max)" Nullable="false" />
@@ -39,11 +44,19 @@
           <Property Name="ContentType_Id" Type="int" Nullable="false" />
           <Property Name="Phase_Id" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="ItemPhase">
+          <Key>
+            <PropertyRef Name="ItemPhase_Id" />
+          </Key>
+          <Property Name="ItemPhase_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Item_Id" Type="int" Nullable="false" />
+          <Property Name="Phase_Id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="ItemSubject">
           <Key>
             <PropertyRef Name="ItemSubject_Id" />
           </Key>
-          <Property Name="ItemSubject_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemSubject_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Item_Id" Type="int" Nullable="false" />
           <Property Name="Subject_Id" Type="int" Nullable="false" />
         </EntityType>
@@ -51,7 +64,7 @@
           <Key>
             <PropertyRef Name="ItemTarget_Id" />
           </Key>
-          <Property Name="ItemTarget_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemTarget_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Item_Id" Type="int" Nullable="false" />
           <Property Name="Target_Id" Type="int" Nullable="false" />
         </EntityType>
@@ -59,7 +72,7 @@
           <Key>
             <PropertyRef Name="Phase_Id" />
           </Key>
-          <Property Name="Phase_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Phase_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Phase_Description" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="Phase_Date" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
@@ -68,7 +81,7 @@
           <Key>
             <PropertyRef Name="Subject_Id" />
           </Key>
-          <Property Name="Subject_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Subject_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Subject_Description" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="Subject_Date" Type="datetime" Nullable="false" />
           <Property Name="Subject_Thumbnail" Type="varchar" MaxLength="150" />
@@ -78,31 +91,31 @@
           <Key>
             <PropertyRef Name="Target_Id" />
           </Key>
-          <Property Name="Target_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Target_Id" Type="int" Nullable="false" />
           <Property Name="Target_Description" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="Target_Date" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Item_ContentType">
-          <End Role="ContentType" Type="Self.ContentType" Multiplicity="1" />
-          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+        <Association Name="FK_ItemPhase_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="ItemPhase" Type="Self.ItemPhase" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ContentType">
-              <PropertyRef Name="ContentType_Id" />
+            <Principal Role="Item">
+              <PropertyRef Name="Item_Id" />
             </Principal>
-            <Dependent Role="Item">
-              <PropertyRef Name="ContentType_Id" />
+            <Dependent Role="ItemPhase">
+              <PropertyRef Name="Item_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Item_Phase">
+        <Association Name="FK_ItemPhase_Phase">
           <End Role="Phase" Type="Self.Phase" Multiplicity="1" />
-          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <End Role="ItemPhase" Type="Self.ItemPhase" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Phase">
               <PropertyRef Name="Phase_Id" />
             </Principal>
-            <Dependent Role="Item">
+            <Dependent Role="ItemPhase">
               <PropertyRef Name="Phase_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -156,21 +169,29 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="KnowledgeBoxModelStoreContainer">
-          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContentType" EntityType="Self.ContentType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemPhase" EntityType="Self.ItemPhase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemSubject" EntityType="Self.ItemSubject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemTarget" EntityType="Self.ItemTarget" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Phase" EntityType="Self.Phase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Target" EntityType="Self.Target" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Item_ContentType" Association="Self.FK_Item_ContentType">
-            <End Role="ContentType" EntitySet="ContentType" />
+          <EntitySet Name="Cart" EntityType="Self.Cart" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Cart].[Id] AS [Id], 
+[Cart].[Cart_Id] AS [Cart_Id], 
+[Cart].[Cart_Date] AS [Cart_Date], 
+[Cart].[Item_Id] AS [Item_Id]
+FROM [dbo].[Cart] AS [Cart]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_ItemPhase_Item" Association="Self.FK_ItemPhase_Item">
             <End Role="Item" EntitySet="Item" />
+            <End Role="ItemPhase" EntitySet="ItemPhase" />
           </AssociationSet>
-          <AssociationSet Name="FK_Item_Phase" Association="Self.FK_Item_Phase">
+          <AssociationSet Name="FK_ItemPhase_Phase" Association="Self.FK_ItemPhase_Phase">
             <End Role="Phase" EntitySet="Phase" />
-            <End Role="Item" EntitySet="Item" />
+            <End Role="ItemPhase" EntitySet="ItemPhase" />
           </AssociationSet>
           <AssociationSet Name="FK_ItemSubject_Item" Association="Self.FK_ItemSubject_Item">
             <End Role="Item" EntitySet="Item" />
@@ -205,10 +226,6 @@
             <End Role="ContentType" EntitySet="ContentTypes" />
             <End Role="Item" EntitySet="Items" />
           </AssociationSet>
-          <AssociationSet Name="FK_Item_Phase" Association="KnowledgeBoxModel.FK_Item_Phase">
-            <End Role="Phase" EntitySet="Phases" />
-            <End Role="Item" EntitySet="Items" />
-          </AssociationSet>
           <AssociationSet Name="FK_ItemSubject_Item" Association="KnowledgeBoxModel.FK_ItemSubject_Item">
             <End Role="Item" EntitySet="Items" />
             <End Role="ItemSubject" EntitySet="ItemSubjects" />
@@ -226,6 +243,15 @@
             <End Role="ItemTarget" EntitySet="ItemTargets" />
           </AssociationSet>
           <EntitySet Name="Carts" EntityType="KnowledgeBoxModel.Cart" />
+          <EntitySet Name="ItemPhases" EntityType="KnowledgeBoxModel.ItemPhase" />
+          <AssociationSet Name="FK_ItemPhase_Phase" Association="KnowledgeBoxModel.FK_ItemPhase_Phase">
+            <End Role="Phase" EntitySet="Phases" />
+            <End Role="ItemPhase" EntitySet="ItemPhases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemPhase_Item" Association="KnowledgeBoxModel.FK_ItemPhase_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="ItemPhase" EntitySet="ItemPhases" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ContentType">
           <Key>
@@ -252,10 +278,10 @@
           <Property Name="ContentType_Id" Type="Int32" Nullable="false" />
           <Property Name="Phase_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ContentType" Relationship="KnowledgeBoxModel.FK_Item_ContentType" FromRole="Item" ToRole="ContentType" />
-          <NavigationProperty Name="Phase" Relationship="KnowledgeBoxModel.FK_Item_Phase" FromRole="Item" ToRole="Phase" />
           <NavigationProperty Name="ItemSubjects" Relationship="KnowledgeBoxModel.FK_ItemSubject_Item" FromRole="Item" ToRole="ItemSubject" />
           <NavigationProperty Name="ItemTargets" Relationship="KnowledgeBoxModel.FK_ItemTarget_Item" FromRole="Item" ToRole="ItemTarget" />
           <Property Name="Item_SystemFileName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ItemPhases" Relationship="KnowledgeBoxModel.FK_ItemPhase_Item" FromRole="Item" ToRole="ItemPhase" />
         </EntityType>
         <EntityType Name="ItemSubject">
           <Key>
@@ -285,7 +311,7 @@
           <Property Name="Phase_Description" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
           <Property Name="Phase_Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Items" Relationship="KnowledgeBoxModel.FK_Item_Phase" FromRole="Phase" ToRole="Item" />
+          <NavigationProperty Name="ItemPhases" Relationship="KnowledgeBoxModel.FK_ItemPhase_Phase" FromRole="Phase" ToRole="ItemPhase" />
         </EntityType>
         <EntityType Name="Subject">
           <Key>
@@ -317,18 +343,6 @@
             </Principal>
             <Dependent Role="Item">
               <PropertyRef Name="ContentType_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Item_Phase">
-          <End Role="Phase" Type="KnowledgeBoxModel.Phase" Multiplicity="1" />
-          <End Role="Item" Type="KnowledgeBoxModel.Item" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Phase">
-              <PropertyRef Name="Phase_Id" />
-            </Principal>
-            <Dependent Role="Item">
-              <PropertyRef Name="Phase_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -389,6 +403,40 @@
           <Property Name="Cart_Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Item_Id" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="ItemPhase">
+          <Key>
+            <PropertyRef Name="ItemPhase_Id" />
+          </Key>
+          <Property Name="ItemPhase_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Item_Id" Type="Int32" Nullable="false" />
+          <Property Name="Phase_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Phase" Relationship="KnowledgeBoxModel.FK_ItemPhase_Phase" FromRole="ItemPhase" ToRole="Phase" />
+          <NavigationProperty Name="Item" Relationship="KnowledgeBoxModel.FK_ItemPhase_Item" FromRole="ItemPhase" ToRole="Item" />
+        </EntityType>
+        <Association Name="FK_ItemPhase_Phase">
+          <End Type="KnowledgeBoxModel.Phase" Role="Phase" Multiplicity="1" />
+          <End Type="KnowledgeBoxModel.ItemPhase" Role="ItemPhase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phase">
+              <PropertyRef Name="Phase_Id" />
+            </Principal>
+            <Dependent Role="ItemPhase">
+              <PropertyRef Name="Phase_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemPhase_Item">
+          <End Type="KnowledgeBoxModel.Item" Role="Item" Multiplicity="1" />
+          <End Type="KnowledgeBoxModel.ItemPhase" Role="ItemPhase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Item_Id" />
+            </Principal>
+            <Dependent Role="ItemPhase">
+              <PropertyRef Name="Item_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -478,6 +526,15 @@
                 <ScalarProperty Name="Cart_Date" ColumnName="Cart_Date" />
                 <ScalarProperty Name="Cart_Id" ColumnName="Cart_Id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemPhases">
+            <EntityTypeMapping TypeName="KnowledgeBoxModel.ItemPhase">
+              <MappingFragment StoreEntitySet="ItemPhase">
+                <ScalarProperty Name="Phase_Id" ColumnName="Phase_Id" />
+                <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+                <ScalarProperty Name="ItemPhase_Id" ColumnName="ItemPhase_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

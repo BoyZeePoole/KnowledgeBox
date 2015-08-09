@@ -37,14 +37,14 @@ namespace KnowledgeBox.Controllers
             else
                 ViewBag.ContentType = new SelectList(db.ContentTypes.OrderBy(c => c.ContentType_Description), "ContentType_Id", "ContentType_Description");
 
-            if (item != null)
-                ViewBag.Phase = new SelectList(db.Phases.OrderBy(c => c.Phase_Description), "Phase_Id", "Phase_Description", item.Phase_Id);
-            else
-                ViewBag.Phase = new SelectList(db.Phases.OrderBy(c => c.Phase_Description), "Phase_Id", "Phase_Description");
-
+            
+            ViewBag.Phase = new SelectList(db.Phases.OrderBy(s => s.Phase_Description), "Phase_Id", "Phase_Description");
             ViewBag.Subject = new SelectList(db.Subjects.OrderBy(s => s.Subject_Description), "Subject_Id", "Subject_Description");
             ViewBag.Target = new SelectList(db.Targets.OrderBy(s => s.Target_Description), "Target_Id", "Target_Description");
 
+            var itemPhase = db.ItemPhases.Where(i => i.Item_Id == id);
+            var arrPhase = itemPhase.Select(x => x.Phase.Phase_Id).ToArray();
+            ViewBag.PhaseSelected = arrPhase;
 
             var itemSubject = db.ItemSubjects.Where(i => i.Item_Id == id);
             var arrSubject = itemSubject.Select(x => x.Subject.Subject_Id).ToArray();
@@ -60,7 +60,7 @@ namespace KnowledgeBox.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Item item, string[] subject, string[] target, HttpPostedFileBase Item_FilePath, int id = 0)
+        public ActionResult Edit(Item item, string[] subject, string[] target, string[] phase, HttpPostedFileBase Item_FilePath, int id = 0)
         {
             if (ModelState.IsValid)
             {
@@ -92,6 +92,11 @@ namespace KnowledgeBox.Controllers
                 {
                     db.ItemSubjects.Remove(itemSubject);
                 }
+                var itemPhases = db.ItemPhases.Where(e => e.Item_Id == id);
+                foreach (var itemPhase in itemPhases)
+                {
+                    db.ItemPhases.Remove(itemPhase);
+                }
                 var itemTargets = db.ItemTargets.Where(e => e.Item_Id == id);
                 foreach (var itemTarget in itemTargets)
                 {
@@ -103,6 +108,13 @@ namespace KnowledgeBox.Controllers
                     foreach (var sub in subject)
                     {
                         db.ItemSubjects.Add(new ItemSubject { Item_Id = itemId, Subject_Id = Convert.ToInt32(sub) });
+                    }
+                }
+                if (phase != null)
+                {
+                    foreach (var pha in phase)
+                    {
+                        db.ItemPhases.Add(new ItemPhase { Item_Id = itemId, Phase_Id = Convert.ToInt32(pha) });
                     }
                 }
                 if (target != null)
@@ -125,6 +137,7 @@ namespace KnowledgeBox.Controllers
 
 
             ViewBag.SubjectSelected = (subject != null) ? subject : new string[] { };
+            ViewBag.PhaseSelected = (phase != null) ? phase : new string[] { };
             ViewBag.TargetSelected = (target != null) ? target : new string[] { }; ;
             //return RedirectToAction("Index");
             return View("Admin", item);

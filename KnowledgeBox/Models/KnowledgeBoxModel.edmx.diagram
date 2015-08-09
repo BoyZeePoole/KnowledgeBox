@@ -6,19 +6,21 @@
     <edmx:Diagrams>
       <Diagram DiagramId="dadff07c0c6a450ebc119f684a216e3c" Name="Diagram1" DisplayType="false">
         <EntityTypeShape EntityType="KnowledgeBoxModel.ContentType" Width="1.875" PointX="0.5" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="KnowledgeBoxModel.Item" Width="1.5" PointX="3.625" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="KnowledgeBoxModel.ItemSubject" Width="1.5" PointX="6.625" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="KnowledgeBoxModel.ItemTarget" Width="1.5" PointX="6.125" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="KnowledgeBoxModel.Phase" Width="1.5" PointX="0.5" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="KnowledgeBoxModel.Subject" Width="1.5" PointX="9.375" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="KnowledgeBoxModel.Target" Width="1.5" PointX="9" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KnowledgeBoxModel.Item" Width="1.875" PointX="3.625" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KnowledgeBoxModel.ItemSubject" Width="1.5" PointX="8" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KnowledgeBoxModel.ItemTarget" Width="1.5" PointX="8" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KnowledgeBoxModel.Phase" Width="1.5" PointX="11.5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KnowledgeBoxModel.Subject" Width="1.5" PointX="10.375" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KnowledgeBoxModel.Target" Width="1.5" PointX="10.75" PointY="0.5" IsExpanded="true" />
         <AssociationConnector Association="KnowledgeBoxModel.FK_Item_ContentType" ManuallyRouted="false" />
-        <AssociationConnector Association="KnowledgeBoxModel.FK_Item_Phase" ManuallyRouted="false" />
         <AssociationConnector Association="KnowledgeBoxModel.FK_ItemSubject_Item" ManuallyRouted="false" />
         <AssociationConnector Association="KnowledgeBoxModel.FK_ItemTarget_Item" ManuallyRouted="false" />
         <AssociationConnector Association="KnowledgeBoxModel.FK_ItemSubject_Subject" ManuallyRouted="false" />
         <AssociationConnector Association="KnowledgeBoxModel.FK_ItemTarget_Target" ManuallyRouted="false" />
         <EntityTypeShape EntityType="KnowledgeBoxModel.Cart" Width="1.5" PointX="3.375" PointY="5.75" />
+        <EntityTypeShape EntityType="KnowledgeBoxModel.ItemPhase" Width="1.5" PointX="8" PointY="4.875" />
+        <AssociationConnector Association="KnowledgeBoxModel.FK_ItemPhase_Phase" />
+        <AssociationConnector Association="KnowledgeBoxModel.FK_ItemPhase_Item" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -68,21 +68,21 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Phase, new { @class = "col-sm-2 control-label", @for = "phase" })
+                    <label class="col-sm-2 control-label" for="Phase">Phase</label>
                     <div class="col-sm-6">
-                        @Html.DropDownListFor(m => m.Phase_Id, ViewBag.Phase as SelectList, new { @class = "form-control multiselect" })
+                        @Html.DropDownList("Phase", ViewBag.Phase as SelectList, new { @class = "form-control multiselect", multiple = "multiple", name = "phase[]" })
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="name">Subject</label>
+                  <label class="col-sm-2 control-label" for="Subject">Subject</label>
                     <div class="col-sm-6">
                         @Html.DropDownList("Subject", ViewBag.Subject as SelectList, new { @class = "form-control multiselect", multiple = "multiple", name = "subject[]" })
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="name">Target</label>
+                  <label class="col-sm-2 control-label" for="Target">Target</label>
                     <div class="col-sm-6">
                         @Html.DropDownList("Target", ViewBag.Target as SelectList, new { @class = "form-control multiselect", multiple = "multiple", name = "target[]" })
                     </div>
@@ -151,7 +151,14 @@
     {
       <text>
         $('#Subject').multiselect('select', '@subject');
-        </text>
+      </text>
+    }
+
+              @foreach (var phase in ViewBag.PhaseSelected as Array)
+      {
+      <text>
+      $('#Phase').multiselect('select', '@phase');
+      </text>
     }
 
         @foreach (var target in ViewBag.TargetSelected as Array)

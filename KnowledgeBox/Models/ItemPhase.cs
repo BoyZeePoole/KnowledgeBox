@@ -12,18 +12,13 @@ namespace KnowledgeBox.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Phase
+    public partial class ItemPhase
     {
-        public Phase()
-        {
-            this.ItemPhases = new HashSet<ItemPhase>();
-        }
-    
+        public int ItemPhase_Id { get; set; }
+        public int Item_Id { get; set; }
         public int Phase_Id { get; set; }
-        public string Phase_Description { get; set; }
-        public System.DateTime Phase_Date { get; set; }
-        public int CreatedBy { get; set; }
     
-        public virtual ICollection<ItemPhase> ItemPhases { get; set; }
+        public virtual Phase Phase { get; set; }
+        public virtual Item Item { get; set; }
     }
 }

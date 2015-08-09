@@ -39,9 +39,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
     <Reference Include="Ionic.Zip">
       <HintPath>..\packages\DotNetZip.1.9.3\lib\net20\Ionic.Zip.dll</HintPath>
     </Reference>
@@ -211,7 +208,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper.cs" />
-    <Compile Include="KnowledgwBoxEntities.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AttributesClass.cs" />
     <Compile Include="Models\Cart.cs">
@@ -223,13 +219,15 @@
     <Compile Include="Models\Item.cs">
       <DependentUpon>KnowledgeBoxModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ItemPhase.cs">
+      <DependentUpon>KnowledgeBoxModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ItemSubject.cs">
       <DependentUpon>KnowledgeBoxModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ItemTarget.cs">
       <DependentUpon>KnowledgeBoxModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\KnowledgeBoxContext.cs" />
     <Compile Include="Models\KnowledgeBoxModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

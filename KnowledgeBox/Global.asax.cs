@@ -26,7 +26,8 @@ namespace KnowledgeBox
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
 
-            WebSecurity.InitializeDatabaseConnection("KnowledgeBoxContext", "UserProfile", "UserId", "UserName", autoCreateTables: true);                    
+            WebSecurity.InitializeDatabaseConnection("KnowledgeBoxContext", "UserProfile", "UserId", "UserName", autoCreateTables: true);        
+            
 
         }
     }
