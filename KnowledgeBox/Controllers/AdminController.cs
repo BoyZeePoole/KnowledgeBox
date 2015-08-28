@@ -300,8 +300,9 @@ namespace KnowledgeBox.Controllers
 
             var items = (from i in db.Items
                          from s in i.ItemSubjects
+                         from p in i.ItemPhases
                          where s.Subject_Id == subjectId
-                         && i.Phase_Id == phaseId
+                         && p.Phase_Id == phaseId
                          select i).OrderByDescending(x=>x.CreatedBy).ToPagedList(pageNumber, pageSize);
             
             var phaseTitle = db.Phases.Where(phase => phase.Phase_Id == phaseId).SingleOrDefault().Phase_Description;

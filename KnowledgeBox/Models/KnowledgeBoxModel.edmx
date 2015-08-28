@@ -5,16 +5,11 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="KnowledgeBoxModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Knowledgebox.dbo.Cart' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Cart">
           <Key>
             <PropertyRef Name="Id" />
-            
-            
-            
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Cart_Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Cart_Date" Type="datetime" Nullable="false" />
           <Property Name="Item_Id" Type="int" Nullable="false" />
@@ -56,7 +51,7 @@ warning 6002: The table/view 'Knowledgebox.dbo.Cart' does not have a primary key
           <Key>
             <PropertyRef Name="ItemSubject_Id" />
           </Key>
-          <Property Name="ItemSubject_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ItemSubject_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Item_Id" Type="int" Nullable="false" />
           <Property Name="Subject_Id" Type="int" Nullable="false" />
         </EntityType>
@@ -64,7 +59,7 @@ warning 6002: The table/view 'Knowledgebox.dbo.Cart' does not have a primary key
           <Key>
             <PropertyRef Name="ItemTarget_Id" />
           </Key>
-          <Property Name="ItemTarget_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ItemTarget_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Item_Id" Type="int" Nullable="false" />
           <Property Name="Target_Id" Type="int" Nullable="false" />
         </EntityType>
@@ -81,7 +76,7 @@ warning 6002: The table/view 'Knowledgebox.dbo.Cart' does not have a primary key
           <Key>
             <PropertyRef Name="Subject_Id" />
           </Key>
-          <Property Name="Subject_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Subject_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Subject_Description" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="Subject_Date" Type="datetime" Nullable="false" />
           <Property Name="Subject_Thumbnail" Type="varchar" MaxLength="150" />
@@ -91,7 +86,7 @@ warning 6002: The table/view 'Knowledgebox.dbo.Cart' does not have a primary key
           <Key>
             <PropertyRef Name="Target_Id" />
           </Key>
-          <Property Name="Target_Id" Type="int" Nullable="false" />
+          <Property Name="Target_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Target_Description" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="Target_Date" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
@@ -169,6 +164,7 @@ warning 6002: The table/view 'Knowledgebox.dbo.Cart' does not have a primary key
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="KnowledgeBoxModelStoreContainer">
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContentType" EntityType="Self.ContentType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemPhase" EntityType="Self.ItemPhase" Schema="dbo" store:Type="Tables" />
@@ -177,14 +173,6 @@ warning 6002: The table/view 'Knowledgebox.dbo.Cart' does not have a primary key
           <EntitySet Name="Phase" EntityType="Self.Phase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Target" EntityType="Self.Target" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Cart" EntityType="Self.Cart" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[Cart].[Id] AS [Id], 
-[Cart].[Cart_Id] AS [Cart_Id], 
-[Cart].[Cart_Date] AS [Cart_Date], 
-[Cart].[Item_Id] AS [Item_Id]
-FROM [dbo].[Cart] AS [Cart]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_ItemPhase_Item" Association="Self.FK_ItemPhase_Item">
             <End Role="Item" EntitySet="Item" />
             <End Role="ItemPhase" EntitySet="ItemPhase" />
