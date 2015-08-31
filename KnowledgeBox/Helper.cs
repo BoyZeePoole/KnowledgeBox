@@ -7,16 +7,18 @@ namespace KnowledgeBox
 {
     public class Helper
     {
-        public static Guid GetNewGuid()
+        public static Guid GetNewGuid(string guidId = "")
         {
-            Guid guid = Guid.NewGuid();
-
-            return guid;
-        }
-        public static Guid GetNewGuid(string guidId)
-        {
-            Guid guid = new Guid(guidId);
-            return guid;
+            if (string.IsNullOrEmpty(guidId))
+            {
+                Guid guid = Guid.NewGuid();
+                return guid;
+            }
+            else
+            {
+                Guid guid = new Guid(guidId);
+                return guid;
+            }
         }
     }
 }

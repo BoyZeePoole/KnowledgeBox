@@ -68,5 +68,11 @@ namespace KnowledgeBox.Controllers
 
             return View();
         }
+        public ActionResult Intermediate()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
     }
 }

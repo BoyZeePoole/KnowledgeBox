@@ -489,6 +489,7 @@
     <Content Include="Views\Admin\Lucene.cshtml" />
     <Content Include="Views\Admin\SearchAllResults.cshtml" />
     <Content Include="Views\Admin\SQL.cshtml" />
+    <Content Include="Views\Home\Intermediate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />

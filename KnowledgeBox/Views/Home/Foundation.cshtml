@@ -1,38 +1,46 @@
 ﻿@{
-    ViewBag.Title = "Foundation";
+  ViewBag.Title = "Foundation";
 }
 
 <div class="container" style="height: 712px; width: 980px;padding-right: 0px;padding-left: 0px;margin-right: auto;margin-left: auto">
-    <div class="row" style="margin:0">
-        <div class="col-md-12" style="z-index:100">
-            <div style="text-align: center; font-family: Liberation;color:#FFF;font-size:30px">
-                Foundation Phase
-            </div>
-            <br />
-            <div class="col-md-4" style="">
-                <div style="margin-right: auto; margin-left: auto;width:220px; text-align: center; font-family: Liberation; color: #FFF; font-size: 18px; font-weight: bold; background: rgb(242, 145, 41); padding: 20px">
-                    Literacy Resources<br />
-                    <a href="@Url.Action("SearchResult", "Admin", new { @phaseId = 1, @subjectId = 3, @pageLink="/Home/Foundation" })">
-                        <img src="~/Images/LiteracyRes.jpg" />
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div style="width:262px;text-align: center; font-family: Liberation; color: #FFF; font-size: 18px; font-weight:bold;background: rgb(242, 145, 41);padding:20px;margin-top:100px">
-                    Numeracy Resources<br />
-                    <a href="@Url.Action("SearchResult", "Admin", new { @phaseId = 1, @subjectId = 5, @pageLink="/Home/Foundation" })">
-                        <img src="~/Images/NumeracyRes.jpg" />
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div style="width:277px;text-align: center; font-family: Liberation; color: #FFF; font-size: 18px; font-weight:bold;background: rgb(242, 145, 41);padding:20px">
-                    Life Skills Resources<br />
-                    <a href="@Url.Action("SearchResult", "Admin", new { @phaseId = 1, @subjectId = 4, @pageLink="/Home/Foundation" })">
-                        <img src="~/Images/LifeSkills.jpg" />
-                    </a>
-                </div>
-            </div>
+  <div class="row" style="margin:0">
+    <div class="col-md-12" style="z-index:100">
+      <div style="text-align: center; font-family: Liberation;color:#FFF;font-size:30px">
+        Foundation Phase (Grades R-3)
+      </div>
+      <br />
+      <div class="col-md-4" style="">
+        <div style="margin-right: auto; margin-left: auto;width:277px; text-align: center; font-family: Liberation; color: #FFF; font-size: 18px; font-weight: bold; background: rgb(242, 145, 41); padding: 20px">
+          Languages<br />
+          <a href="@Url.Action("SearchResult", "Admin", new { @phaseId = 1, @subjectId = 3, @pageLink="/Home/Foundation" })">
+            <img src="~/Images/LiteracyRes.jpg" />
+          </a>
         </div>
+      </div>
+      <div class="col-md-4">
+        <div style="width:277px;text-align: center; font-family: Liberation; color: #FFF; font-size: 18px; font-weight:bold;background: rgb(242, 145, 41);padding:20px;margin-top:100px">
+          Mathematics<br />
+          <a href="@Url.Action("SearchResult", "Admin", new { @phaseId = 1, @subjectId = 5, @pageLink="/Home/Foundation" })">
+            <img src="~/Images/NumeracyRes.jpg" />
+          </a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div style="width:277px;text-align: center; font-family: Liberation; color: #FFF; font-size: 18px; font-weight:bold;background: rgb(242, 145, 41);padding:20px">
+          Life Skills<br />
+          <a href="@Url.Action("SearchResult", "Admin", new { @phaseId = 1, @subjectId = 4, @pageLink="/Home/Foundation" })">
+            <img src="~/Images/LifeSkills.jpg" />
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-12" style="text-align:center">
+        <a href="/Home/Phases" class="orangeLink">
+          <div class="orangeButton orangeButtonSmall" style="padding-top:8px;width:250px;margin:0 auto">
+            <span>< Back to Phases Page</span>
+          </div>
+        </a>
+      </div>
     </div>
+  </div>
 </div>

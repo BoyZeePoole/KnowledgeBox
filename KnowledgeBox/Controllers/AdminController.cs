@@ -303,7 +303,8 @@ namespace KnowledgeBox.Controllers
                          from p in i.ItemPhases
                          where s.Subject_Id == subjectId
                          && p.Phase_Id == phaseId
-                         select i).OrderByDescending(x=>x.CreatedBy).ToPagedList(pageNumber, pageSize);
+                         //select i).OrderByDescending(x=>x.CreatedBy).ToPagedList(pageNumber, pageSize);
+                         select i).OrderBy(x => x.Item_Name).ToPagedList(pageNumber, pageSize);
             
             var phaseTitle = db.Phases.Where(phase => phase.Phase_Id == phaseId).SingleOrDefault().Phase_Description;
             var subjectTitle = db.Subjects.Where(subject => subject.Subject_Id == subjectId).SingleOrDefault().Subject_Description;
@@ -326,7 +327,7 @@ namespace KnowledgeBox.Controllers
         {
             int pageSize = 6;
             int pageNumber = (page ?? 1);
-            var items = LuceneSearch.Search(searchPhrase);
+            var items = LuceneSearch.Search(searchPhrase).Where(x=>x!=null);
             if (string.IsNullOrEmpty(viewName))
                 return View("index", items.ToPagedList(pageNumber, pageSize));
             else

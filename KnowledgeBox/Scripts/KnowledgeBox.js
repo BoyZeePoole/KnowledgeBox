@@ -38,7 +38,10 @@ $(document).ready(function () {
         break;
       case "Video":
         OpenVideo(file, title);
-        break;        
+        break;
+      case "Audio":
+        OpenAudio(file, title);
+        break;
       case "Application":
         OpenApp(file, title);
         break;
@@ -197,7 +200,19 @@ var OpenVideo = function (file, title) {
   var vidCode = "<video width=\"640\" height=\"480\" controls><source src=\""+file+"\" type=\"video/mp4\">Your browser does not support the video tag.</video>";
   $(".modal-body").html(vidCode);
 }
-
+var OpenAudio = function (file, title) {
+  $("#myModalLabel").text(title);
+  var file = "/Files/" + file;
+  var audioCode = "<audio controls><source src=\"" + file + "\" >Your browser does not support the video tag.</audio>";
+  $(".modal-body").html(audioCode);
+}
+/*
+<audio controls>
+  <source src="horse.ogg" type="audio/ogg">
+  <source src="horse.mp3" type="audio/mpeg">
+  Your browser does not support the audio tag.
+</audio>
+*/
 var OpenFlash = function (file, title) {
   $("#myModalLabel").text(title);
   var file = "/Files/" + file;
