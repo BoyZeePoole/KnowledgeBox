@@ -127,15 +127,16 @@ namespace KnowledgeBox.Upload
         // Upload entire file
         private void UploadWholeFile(HttpContext context, List<FilesStatus> statuses)
         {
-            // right here!!!
-            int phaseId = 0;
-            bool parsed = int.TryParse(context.Request.Form["Phase_Id"], out phaseId);
-            string extendedPath = HelperClass.GetPhaseDescription(phaseId);
+            List<int> phaseIds = Helper.GetPhaseIds(context.Request.Form["Phase"]);
+            string extendedPath = HelperClass.GetPhaseDescription(phaseIds.FirstOrDefault());
             for (int i = 0; i < context.Request.Files.Count; i++)
             {
                 var file = context.Request.Files[i];
                 HelperClass.CreateFolder(StorageRoot + extendedPath);
-                var fullPath = StorageRoot + extendedPath + "\\" + Path.GetFileName(file.FileName);
+                string fullPath = string.Empty;
+
+                fullPath = Path.Combine(StorageRoot, extendedPath, Path.GetFileName(file.FileName));
+
 
                 file.SaveAs(fullPath);
 
@@ -143,7 +144,7 @@ namespace KnowledgeBox.Upload
                 statuses.Add(new FilesStatus(fullName, file.ContentLength, fullPath));
             }
         }
-        
+
         private void WriteJsonIframeSafe(HttpContext context, List<FilesStatus> statuses)
         {
             context.Response.AddHeader("Vary", "Accept");

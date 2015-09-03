@@ -12,17 +12,17 @@ using System.Data.SqlClient;
 
 namespace KnowledgeBox.Controllers
 {
-  
+
     public class AdminController : Controller
     {
         //
         // GET: /Admin/
         private KnowledgeBoxEntities db = new KnowledgeBoxEntities();
 
-        [Authorize(Roles="admin")]
+        [Authorize(Roles = "admin")]
         public ActionResult Index(int? page)
         {
-            var items = db.Items.OrderByDescending(x=>x.CreatedBy);
+            var items = db.Items.OrderByDescending(x => x.CreatedBy);
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(items.ToPagedList(pageNumber, pageSize));
@@ -37,7 +37,7 @@ namespace KnowledgeBox.Controllers
             else
                 ViewBag.ContentType = new SelectList(db.ContentTypes.OrderBy(c => c.ContentType_Description), "ContentType_Id", "ContentType_Description");
 
-            
+
             ViewBag.Phase = new SelectList(db.Phases.OrderBy(s => s.Phase_Description), "Phase_Id", "Phase_Description");
             ViewBag.Subject = new SelectList(db.Subjects.OrderBy(s => s.Subject_Description), "Subject_Id", "Subject_Description");
             ViewBag.Target = new SelectList(db.Targets.OrderBy(s => s.Target_Description), "Target_Id", "Target_Description");
@@ -67,10 +67,15 @@ namespace KnowledgeBox.Controllers
                 //item.CreatedBy = 1; // Still need to tie this to a real user...
                 item.CreatedBy = WebSecurity.GetUserId(User.Identity.Name);
                 item.Item_Date = DateTime.Today;
-                var phaseDesc = HelperClass.GetPhaseDescription(item.Phase_Id);
-
-                item.Item_FilePath = phaseDesc + "/" + item.Item_FilePath;
-
+                List<int> phaseIds = Helper.GetPhaseIds(phase);
+                var phaseDesc = HelperClass.GetPhaseDescription(phaseIds.FirstOrDefault());
+                if (Item_FilePath != null)
+                {
+                    if (!item.Item_FilePath.Contains(phaseDesc))
+                    {
+                        item.Item_FilePath = Path.Combine(phaseDesc, item.Item_FilePath);
+                    }
+                }
                 if (id == 0)
                 {
                     db.Entry(item).State = System.Data.EntityState.Added;
@@ -143,7 +148,7 @@ namespace KnowledgeBox.Controllers
             return View("Admin", item);
         }
 
-        
+
         /// <summary>
         /// Subject Actions
         /// </summary>
@@ -161,7 +166,7 @@ namespace KnowledgeBox.Controllers
             return View("EditSubject", item);
         }
         [HttpPost]
-        public ActionResult EditSubject(Subject subject, int id=0)
+        public ActionResult EditSubject(Subject subject, int id = 0)
         {
             if (ModelState.IsValid)
             {
@@ -174,7 +179,7 @@ namespace KnowledgeBox.Controllers
                 }
                 else
                 {
-                    subject.Subject_Id= id;
+                    subject.Subject_Id = id;
                     db.Entry(subject).State = System.Data.EntityState.Modified;
                 }
                 db.SaveChanges();
@@ -268,7 +273,7 @@ namespace KnowledgeBox.Controllers
         public ActionResult EditContentType(int id = 0)
         {
             KnowledgeBox.Models.ContentType item = db.ContentTypes.Find(id);
-            return View("EditContentType", item); 
+            return View("EditContentType", item);
         }
         [HttpPost]
         public ActionResult EditContentType(ContentType contentType, HttpPostedFileBase ContentType_Thumbnail, int id = 0)
@@ -290,7 +295,7 @@ namespace KnowledgeBox.Controllers
                 db.SaveChanges();
                 return RedirectToAction("ContentType");
             }
-            return View("EditContentType", contentType);            
+            return View("EditContentType", contentType);
         }
 
         public ActionResult SearchResult(int phaseId, int subjectId, string pageLink, int? page)
@@ -305,7 +310,7 @@ namespace KnowledgeBox.Controllers
                          && p.Phase_Id == phaseId
                          //select i).OrderByDescending(x=>x.CreatedBy).ToPagedList(pageNumber, pageSize);
                          select i).OrderBy(x => x.Item_Name).ToPagedList(pageNumber, pageSize);
-            
+
             var phaseTitle = db.Phases.Where(phase => phase.Phase_Id == phaseId).SingleOrDefault().Phase_Description;
             var subjectTitle = db.Subjects.Where(subject => subject.Subject_Id == subjectId).SingleOrDefault().Subject_Description;
             var subjectImage = db.Subjects.Where(subject => subject.Subject_Id == subjectId).SingleOrDefault().Subject_Thumbnail;
@@ -323,11 +328,11 @@ namespace KnowledgeBox.Controllers
         }
 
         [HttpPost]
-        public ActionResult SearchItems(string searchPhrase, int? page, string viewName="")
+        public ActionResult SearchItems(string searchPhrase, int? page, string viewName = "")
         {
             int pageSize = 6;
             int pageNumber = (page ?? 1);
-            var items = LuceneSearch.Search(searchPhrase).Where(x=>x!=null);
+            var items = LuceneSearch.Search(searchPhrase).Where(x => x != null);
             if (string.IsNullOrEmpty(viewName))
                 return View("index", items.ToPagedList(pageNumber, pageSize));
             else
@@ -349,7 +354,7 @@ namespace KnowledgeBox.Controllers
             }
 
             var cartExists = db.Carts.Where(c => c.Cart_Id == guid && c.Item_Id == itemId);
-            if(cartExists==null || cartExists.Count() < 1)
+            if (cartExists == null || cartExists.Count() < 1)
             {
                 KnowledgeBox.Models.Cart cart = new Cart();
                 cart.Cart_Id = guid;
@@ -357,9 +362,9 @@ namespace KnowledgeBox.Controllers
                 cart.Cart_Date = DateTime.Today;
                 db.Carts.Add(cart);
                 db.SaveChanges();
-                return Json(new { CartGuid = guid.ToString(), warning=string.Empty }, JsonRequestBehavior.AllowGet);
+                return Json(new { CartGuid = guid.ToString(), warning = string.Empty }, JsonRequestBehavior.AllowGet);
             }
-            return Json(new { CartGuid = guid.ToString(), warning="Item already exists in Cart!" }, JsonRequestBehavior.AllowGet);
+            return Json(new { CartGuid = guid.ToString(), warning = "Item already exists in Cart!" }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -381,27 +386,28 @@ namespace KnowledgeBox.Controllers
                     return Json(new { returnValue = "error", errorMessage = ex.Message }, JsonRequestBehavior.AllowGet);
                 }
             }
-            return Json(new { returnValue = "error", errorMessage="cartId "+ cartId+" is not defined..." }, JsonRequestBehavior.AllowGet);
+            return Json(new { returnValue = "error", errorMessage = "cartId " + cartId + " is not defined..." }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public ActionResult RemoveCart(string cartId)
         {
-            Guid guid; 
+            Guid guid;
             if (!string.IsNullOrEmpty(cartId))
             {
                 try
                 {
-                    guid = Helper.GetNewGuid(cartId);                    
+                    guid = Helper.GetNewGuid(cartId);
                     var items = HelperClass.GetItemsFromCart(guid);
                     HelperClass.RemoveCart(guid);
                     string basePath = Server.MapPath("~/Files");
                     var zipFilesPath = items.Select(a => Path.Combine(basePath, a.Item_FilePath));
+
                     return new ZipResult(zipFilesPath);
                 }
                 catch (Exception ex)
                 {
-                    return Json(new { returnValue = "error", errorMessage=ex.Message }, JsonRequestBehavior.AllowGet);
+                    return Json(new { returnValue = "error", errorMessage = ex.Message }, JsonRequestBehavior.AllowGet);
                 }
             }
             else
@@ -409,7 +415,7 @@ namespace KnowledgeBox.Controllers
                 return Json(new { returnValue = "error", errorMessage = "cartId was not defined" }, JsonRequestBehavior.AllowGet);
             }
         }
-        public ActionResult MyResources(int? page,string cartId = "")
+        public ActionResult MyResources(int? page, string cartId = "")
         {
             int pageSize = 5;
             int pageNumber = (page ?? 1);
@@ -419,16 +425,20 @@ namespace KnowledgeBox.Controllers
                 var cartItems = db.Carts.Where(c => c.Cart_Id == guid);
                 ViewBag.CartId = cartId;
                 var items = (from i in db.Items
-                            from c in cartItems
-                            where i.Item_Id == c.Item_Id
-                            select i).OrderByDescending(x=>x.CreatedBy);
+                             from c in cartItems
+                             where i.Item_Id == c.Item_Id
+                             select i).OrderByDescending(x => x.CreatedBy);
                 return View(items.ToPagedList(pageNumber, pageSize));
             }
             var itemsMore = new List<KnowledgeBox.Models.Item>();
 
             return View(itemsMore.ToPagedList(pageNumber, pageSize));
         }
-
+        private string GetPath(string path, string fileName)
+        {
+            string _path = Path.Combine(path, fileName);
+            return _path;
+        }
         public ActionResult Lucene()
         {
             return View("Lucene");
