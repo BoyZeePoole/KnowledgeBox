@@ -327,11 +327,12 @@ namespace KnowledgeBox.Controllers
             return View(items);
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult SearchItems(string searchPhrase, int? page, string viewName = "")
         {
             int pageSize = 6;
             int pageNumber = (page ?? 1);
+            ViewBag.SearchPhrase = searchPhrase;
             var items = LuceneSearch.Search(searchPhrase).Where(x => x != null);
             if (string.IsNullOrEmpty(viewName))
                 return View("index", items.ToPagedList(pageNumber, pageSize));
@@ -401,7 +402,7 @@ namespace KnowledgeBox.Controllers
                     var items = HelperClass.GetItemsFromCart(guid);
                     HelperClass.RemoveCart(guid);
                     string basePath = Server.MapPath("~/Files");
-                    var zipFilesPath = items.Select(a => Path.Combine(basePath, a.Item_FilePath));
+                    var zipFilesPath = items.Select(a => Helper.PathCombine(basePath, a.Item_FilePath));
 
                     return new ZipResult(zipFilesPath);
                 }
@@ -434,11 +435,7 @@ namespace KnowledgeBox.Controllers
 
             return View(itemsMore.ToPagedList(pageNumber, pageSize));
         }
-        private string GetPath(string path, string fileName)
-        {
-            string _path = Path.Combine(path, fileName);
-            return _path;
-        }
+
         public ActionResult Lucene()
         {
             return View("Lucene");

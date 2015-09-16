@@ -32,7 +32,7 @@
             <div>
                 @if (@Model.PageCount > 1)
                 {
-                    @Html.PagedListPager(Model, page => Url.Action("MyResources", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, cartId = ViewBag.CartId }))
+                    @Html.PagedListPager(Model, page => Url.Action("SearchItems", "Admin", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, cartId = ViewBag.CartId, viewName = "SearchAllResults", searchPhrase = ViewBag.SearchPhrase }))
                 }
             </div>
         </div>

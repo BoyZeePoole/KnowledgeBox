@@ -9,7 +9,7 @@
                 Search for resources
                 <img src="~/Images/Search.jpg" />
             </div>
-            @using (Html.BeginForm("SearchItems", "Admin", new { @page = 1, viewName = "SearchAllResults" }, FormMethod.Post, new { @class = "form-horizontal", role = "form"}))
+            @using (Html.BeginForm("SearchItems", "Admin", new { @page = 1, viewName = "SearchAllResults" }, FormMethod.Get, new { @class = "form-horizontal", role = "form"}))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
@@ -22,6 +22,7 @@
                         <li>Click 'search' button</li>
                     </ul>
                     <input type="text" class="form-control" name="searchPhrase" id="searchPhrase" />
+                  <input type="hidden" name="viewName" value="SearchAllResults" />
                 </div>
                 <div style="text-align: center; font-family: Liberation;color:#FFF;font-size:30px;margin-top:12px">
                     <button type="submit" class="btn btn-default btn-lg active">Search</button>
