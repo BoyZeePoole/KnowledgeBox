@@ -327,7 +327,7 @@ namespace KnowledgeBox.Controllers
             return View(items);
         }
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult SearchItems(string searchPhrase, int? page, string viewName = "")
         {
             int pageSize = 6;
