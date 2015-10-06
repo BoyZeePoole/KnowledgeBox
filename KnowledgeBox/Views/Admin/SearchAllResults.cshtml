@@ -1,5 +1,6 @@
 ﻿@model PagedList.IPagedList<KnowledgeBox.Models.Item>
 @using PagedList.Mvc;
+@using HelperClass;
 @{
     ViewBag.Title = "SearchResult";
 }
@@ -24,7 +25,10 @@
                     <div style="width:600px; height:100%; line-height:50px;float:left;margin-left:10px">@item.Item_Description</div>
 
                     <div style="height: 100%; line-height: 50px; float: left; margin-left: 10px">
-                      <div style="cursor:pointer" class="viewer" data-toggle="modal" data-target="#myModal" data-title="@item.Item_Description" data-file="@item.Item_FilePath" data-contenttype="@item.ContentType.ContentType_Description">View</div>
+                        @if (@item.ContentType.ContentType_Description != "Application" || @item.ContentType.ContentType_Description != "Java" || @item.ContentType.ContentType_Description != "Zip File" || @item.ContentType.ContentType_Description != "Powerpoint")
+                        {
+                            <div style="cursor:pointer" class="viewer" data-toggle="modal" data-target="#myModal" data-title="@item.Item_Description" data-file="@item.Item_FilePath" data-contenttype="@item.ContentType.ContentType_Description">View</div>
+                        }                      
                     </div>
                     <div style="height: 100%; line-height: 50px; float: left; margin-left: 20px;cursor:pointer" class="cartItem" data-item-name="@item.Item_Description" data-item-id="@item.Item_Id">Add to Cart</div>
                 </div>
