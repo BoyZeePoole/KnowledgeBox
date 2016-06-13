@@ -174,10 +174,8 @@ var AdjustCartItems = function (number) {
 }
 
 var OpenPdf = function (file, title) {
-  //var htmlString = "<iframe src=\"http://docs.google.com/gview?url={{myPDFFile}}&embedded=true\" style=\"width:600px; height:500px;\" frameborder=\"0\"></iframe>";
   $("#myModalLabel").text(title);
   var host = location.host;
-  //var htmlString = "<iframe src=\""+host+"{{myPDFFile}}\" style=\"width:890px; height:658px;\" frameborder=\"0\"></iframe>";
   var htmlString = "<iframe src=\"{{myPDFFile}}\" style=\"width:1070px; height:658px;\" frameborder=\"0\"></iframe>";
   htmlString = htmlString.replace("{{myPDFFile}}", "/Files/" + file);
   $(".modal-body").html(htmlString);
@@ -206,13 +204,7 @@ var OpenAudio = function (file, title) {
   var audioCode = "<audio controls><source src=\"" + file + "\" >Your browser does not support the video tag.</audio>";
   $(".modal-body").html(audioCode);
 }
-/*
-<audio controls>
-  <source src="horse.ogg" type="audio/ogg">
-  <source src="horse.mp3" type="audio/mpeg">
-  Your browser does not support the audio tag.
-</audio>
-*/
+
 var OpenFlash = function (file, title) {
   $("#myModalLabel").text(title);
   var file = "/Files/" + file;
